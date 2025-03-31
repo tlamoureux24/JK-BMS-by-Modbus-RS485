@@ -1,0 +1,48 @@
+#0x1000  
+    # *  0x006C  108 UINT32  4   RW  CellCount                                           CellCount           string                     number
+    # *  0x0070  112 UINT32  4   RW  Charging switch                                     BatChargeEN             1: open; 0: close      switch
+    # *  0x0074  116 UINT32  4   RW  Discharge switch                                    BatDisChargeEN          1: open; 0: close      switch
+    # *  0x0078  120 UINT32  4   RW  Balance switch                                      BalanEN                 1: open; 0: close      switch
+
+  #    0x006C  108 UINT32  4   RW  CellCount                                           CellCount           string
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} CellCount"
+  # id: CellCount
+  address: 0x106C
+  register_type: holding
+  value_type: U_DWORD
+  # skip_updates: 10
+# unit_of_measurement: ""
+# state_class: measurement
+# accuracy_decimals: 0
+# filters:
+#   - offset: 1.0
+
+    # *  0x0070  112 UINT32  4   RW  Charging switch                                     BatChargeEN             1: open; 0: close      switch
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Charging switch"
+  id: BatChargeEN
+  address: 0x1070
+  register_type: holding
+  value_type: U_DWORD
+
+    # *  0x0074  116 UINT32  4   RW  Discharge switch                                    BatDisChargeEN          1: open; 0: close      switch
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Discharge switch"
+  id: BatDisChargeEN
+  address: 0x1074
+  register_type: holding
+  value_type: U_DWORD
+
+    # *  0x0078  120 UINT32  4   RW  Balance switch                                      BalanEN                 1: open; 0: close      switch
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Balance switch"
+  id: BalanEN
+  address: 0x1078
+  register_type: holding
+  value_type: U_DWORD
+

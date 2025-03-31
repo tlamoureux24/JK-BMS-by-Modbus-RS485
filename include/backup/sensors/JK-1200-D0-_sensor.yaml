@@ -1,0 +1,409 @@
+# 
+# # 0x128A   138    INT16    2    R    TempMos         0.1 °C
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} mosfet temperature"
+#   address: 0x1200
+#   offset: 0x008A
+#   register_type: holding
+#   value_type: S_WORD
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   state_class: measurement
+#   accuracy_decimals: 1
+#   filters:
+#     - multiply: 0.1
+# 
+#   #    0x008C  140 UINT32  4   R   Balance line resistance status                      CellWireResSta          BIT[n] is 1, indicating that the balance line alarm
+# # 0x128C   140   UINT32    4    R    CellWireResSta  Bit per Cell
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Balance line resistance status"   # CellWireResSta
+#   address: 0x128C
+#   register_type: holding
+#   value_type: U_DWORD
+# # device_class: enum
+#   state_class: measurement
+# 
+# # 0x1290   144   UINT32    4    R    BatVol          mV
+#   #    0x0090  144 UINT32  4   R   Total battery voltage                               BatVol              mV
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Total battery voltage"   # BatVol
+#   address: 0x1290
+#   register_type: holding
+#   value_type: U_DWORD
+#   unit_of_measurement: "V"
+#   device_class: voltage
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+# # 0x1294   148   UINT32    4    R    BatWatt         mW
+#   #    0x0094  148 UINT32  4   R   Battery power                                       BatWatt             mW
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery power"   # BatWatt
+#   address: 0x1294
+#   register_type: holding
+#   value_type: U_DWORD
+#   unit_of_measurement: "W"
+#   device_class: power
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+# # 0x1298   152    INT32    4    R    BatCurrent      mA
+#   #    0x0098  152 INT32   4   R   Battery current                                     BatCurrent          mA
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery current"   # BatCurrent
+#   address: 0x1298
+#   register_type: holding
+#   value_type: S_DWORD
+#   unit_of_measurement: "A"
+#   device_class: current
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+#   #    0x009C  156 INT16   2   R   Battery temperature                                 TempBat1            0.1°C
+#   #    0x009E  158 INT16   2   R   Battery temperature                                 TempBat2            0.1°C
+# # 0x129C   156    INT16    2    R    TempBat 1       0.1 °C
+# # 0x129E   158    INT16    2    R    TempBat 2       0.1 °C
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery temperature 1"   # TempBat1
+#   address: 0x129C
+#   register_type: holding
+#   value_type: S_WORD
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   state_class: measurement
+#   accuracy_decimals: 1
+#   filters:
+#     - multiply: 0.1
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery temperature 2"   # TempBat1
+#   address: 0x129E
+#   register_type: holding
+#   value_type: S_WORD
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   state_class: measurement
+#   accuracy_decimals: 1
+#   filters:
+#     - multiply: 0.1
+# 
+#   # 0x12A0   160   UINT32    4    R    AlarmBitmask
+#   #    0x00A0  160 UINT32  4   R   Balance line resistance is too large                AlarmWireRes            1: Fault; 0: Normal     BIT0
+#   #                                MOS over temperature protection                     AlarmMosOTP             1: fault; 0: normal     BIT1
+#   #                                The number of cells does not match the set value.   AlarmCellQuantity       1: Fault; 0: Normal     BIT2
+#   #                                Current sensor abnormality                          AlarmCurSensorErr       1: fault; 0: normal     BIT3
+#   #                                Single cell overvoltage protection                  AlarmCellOVP            1: fault; 0: normal     BIT4
+#   #                                Battery overvoltage protection                      AlarmBatOVP             1: fault; 0: normal     BIT5
+#   #                                Charging overcurrent protection                     AlarmChOCP              1: fault; 0: normal     BIT6
+#   #                                Charging short circuit protection                   AlarmChSCP              1: fault; 0: normal     BIT7
+#   #                                Charging over-temperature protection                AlarmChOTP              1: fault; 0: normal     BIT8
+#   #                                Charging low temperature protection                 AlarmChUTP              1: fault; 0: normal     BIT9
+#   #                                Internal communication abnormality                  AlarmCPUAuxCommuErr     1: Fault; 0: Normal     BIT10
+#   #                                Cell undervoltage protection                        AlarmCellUVP            1: fault; 0: normal     BIT11
+#   #                                Battery undervoltage protection                     AlarmBatUVP             1: fault; 0: normal     BIT12
+#   #                                Discharge overcurrent protection                    AlarmDchOCP             1: fault; 0: normal     BIT13
+#   #                                Discharge short circuit protection                  AlarmDchSCP             1: fault; 0: normal     BIT14
+#   #                                Discharge over-temperature protection               AlarmDchOTP             1: fault; 0: normal     BIT15
+#   #                                Charging tube abnormality                           AlarmChargeMOS          1: fault; 0: normal     BIT16
+#   #                                Discharge tube abnormality                          AlarmDischargeMOS       1: fault; 0: normal     BIT17
+#   #                                GPS disconnected                                    GPSDisconneted          1: fault; 0: normal     BIT18
+#   #                                Please modify the authorization password in time    Modify PWD. in time     1: Fault; 0: Normal     BIT19
+#   #                                Discharge start failure                             Discharge On Failed     1: Failure; 0: Normal   BIT20
+#   #                                Battery over-temperature alarm                      Battery Over Temp Alarm 1: Fault; 0: Normal     BIT21
+#   #                                Temperature sensor abnormality                      Temperature sensor anomaly
+#   #                                Parallel module failure                             PLCModule anomaly
+# 
+# # 0x12A4   164    INT16    2    R    BalanCurrent    mA
+#   #    0x00A4  164 INT16   2   R   Balancing current                                   BalanCurrent        mA
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Balancing current"   # BalanCurrent
+#   address: 0x12A4
+#   register_type: holding
+#   value_type: S_WORD
+#   unit_of_measurement: "A"
+#   device_class: current
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+# 
+# # 0x12A6   166 UINT8+UINT8 2    R    BalanStatatus (2:放电; 1:充电 ; 0:关闭) / SOCStateOfcharge %
+#   #    0x00A6  166 UINT8   2   R   Balancing state                                     BalanSta            %   2: discharge; 1: charge; 0: off
+#   #                UINT8       R   Remaining power                                     SOCStateOfcharge
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Balancing state"     # BalanSta
+#   address: 0x12A6
+#   register_type: holding
+#   value_type: U_WORD
+#   unit_of_measurement: ""
+# # device_class: enum
+#   state_class: measurement
+# # accuracy_decimals: 0
+#   bitmask: 0xFF00
+# # filters:
+# #   - offset: 1.0
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Remaining power"    # SOCStateOfcharge
+#   address: 0x12A6
+#   register_type: holding
+#   value_type: U_WORD
+#   unit_of_measurement: "%"
+#   device_class: battery
+#   state_class: measurement
+# # accuracy_decimals: 0
+#   bitmask: 0x00FF
+# # filters:
+# #   - offset: 1.0
+# 
+# 
+# # 0x12A8   168    INT32    2    R    SOCCapRemain    mAH
+#   #    0x00A8  168 INT32   4   R   Remaining capacity                                  SOCCapRemain        mAH
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Remaining capacity"     # SOCCapRemain
+#   address: 0x12A8
+#   register_type: holding
+#   value_type: U_DWORD
+#   unit_of_measurement: "Ah"
+#   device_class: energy_storage
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+# # 0x12AC   172   UINT32    4    R    SOCFullChargeCap    mAH
+#   #    0x00AC  172 UINT32  4   R   Actual battery capacity                             SOCFullChargeCap    mAH
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Actual battery capacity"     # SOCFullChargeCap
+#   address: 0x12AC
+#   register_type: holding
+#   value_type: U_DWORD
+#   unit_of_measurement: "Ah"
+#   device_class: energy_storage
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+# # 0x12B0   176   UINT32    4    R    SOCCycleCount   次
+#   #    0x00B0  176 UINT32  4   R   Number of cycles                                    SOCCycleCount       times
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Number of cycles"        # SOCCycleCount
+#   address: 0x12B0
+#   register_type: holding
+#   value_type: U_DWORD
+#   state_class: measurement
+#   accuracy_decimals: 0
+# 
+# # 0x12B4   180   UINT32    4    R    SOCCycleCap     mAH
+#   #    0x00B4  180 UINT32  4   R   Total cycle capacity                                SOCCycleCap         mAH
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Total cycle capacity"     # SOCCycleCap
+#   address: 0x12B4
+#   register_type: holding
+#   value_type: U_DWORD
+#   unit_of_measurement: "Ah"
+#   device_class: energy_storage
+#   state_class: measurement
+#   accuracy_decimals: 3
+#   filters:
+#     - multiply: 0.001
+# 
+# # 0x12B8   184 UINT8+UINT8 2    R    StateOfHealth % / Precharge stats (1:打开 ; 0:关闭)
+#   #    0x00B8  184 UINT8   2   R   SOH estimate                                        SOCSOH %
+#   #                UINT8       R   Pre-charge status                                   Precharge               1: open; 0: close
+# # 0x12BA   186   UINT16    2    R    UserAlarm
+# # 0x12BC   188   UINT32    4    R    RunTime         S
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} total runtime in seconds"
+#   address: 0x12BC
+#   register_type: holding
+#   value_type: U_DWORD
+# # device_class: timestamp
+#   state_class: measurement
+#   unit_of_measurement: "s"
+#   accuracy_decimals: 0
+#   id: total_runtime
+# 
+#   #    0x00C0  192 UINT8   2   R   Charge status                                       Charge                  1: open; 0: close
+#   #                UINT8       R   Discharge status                                    Discharge               1: open; 0: close
+# # 0x12C0   192 UINT8+UINT8 Charge (1:打开 ; 0:关闭) / Discharge (1:打开 ; 0:关闭)
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Charge status"     # Charge
+#   address: 0x12C0
+#   register_type: holding
+#   value_type: U_WORD
+#   unit_of_measurement: ""
+# # state_class: measurement
+#   accuracy_decimals: 0
+#   bitmask: 0xFF00
+# # filters:
+# #   - offset: 1.0
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Discharge status"    # Discharge
+#   address: 0x12C0
+#   register_type: holding
+#   value_type: U_WORD
+#   unit_of_measurement: ""
+#   state_class: measurement
+# # accuracy_decimals: 0
+#   bitmask: 0x00FF
+# # filters:
+# #   - offset: 1.0
+# 
+# # 0x12C2   194   UINT16    2    R    UserAlarm2
+#   #    0x00C2  194 UINT16  2   R   User layer alarm 2                                  UserAlarm2
+# # 0x12C4   196   UINT16    2    R    TimeDcOCPR      S
+#   #    0x00C4  196 UINT16  2   R   Discharge overcurrent protection release time       TimeDcOCPR          S
+# # 0x12C6   198   UINT16    2    R    TimeDcSCPR      S
+#   #    0x00C6  198 UINT16  2   R   Discharge short circuit protection release time     TimeDcSCPR          S
+# # 0x12C8   200   UINT16    2    R    TimeCOCPR       S
+#   #    0x00C8  200 UINT16  2   R   Charging overcurrent protection release time        TimeCOCPR           S
+# # 0x12CA   202   UINT16    2    R    TimeCSCPR       S
+#   #    0x00CA  202 UINT16  2   R   Charging short circuit protection release time      TimeCSCPR           S
+# # 0x12CC   204   UINT16    2    R    TimeUVPR        S
+#   #    0x00CC  204 UINT16  2   R   Single undervoltage protection release time         TimeUVPR            S
+# # 0x12CE   206   UINT16    2    R    TimeOVPR        S
+#   #    0x00CE  206 UINT16  2   R   Single overvoltage protection release time          TimeOVPR            S
+# 0x12D0   208 UINT8+UINT8 2    R    AbsentBitmask (Bit0: MOS TempSensorAbsent, Bit1: BATTempSensor1Absent, Bit2: BATTempSensor2Absent, Bit4: BATTempSensor4Absent, Bit5: BATTempSensor5Absent) / Heating
+  #    0x00D0  208 UINT8   2   R   MOS temperature sensor                              MOSTempSensorAbsent                             BIT0
+  #                                Battery temperature sensor 1                        BATTempSensor1Absent    1: Normal; 0: Missing   BIT1
+  #                                Battery temperature sensor 2                        BATTempSensor2Absent    1: Normal; 0: Missing   BIT2
+  #                                Battery temperature sensor 3                        BATTempSensor3Absent    1: Normal; 0: Missing   BIT3
+  #                                Battery temperature sensor 4                        BATTempSensor4Absent    1: Normal; 0: Missing   BIT4
+  #                                Battery temperature sensor 5                        BATTempSensor5Absent    1: Normal; 0: Missing   BIT5
+  #                                Heating status                                      Heating                 1: On; 0: Off
+# 0x12D2   210   UINT16    2    R    Reserved
+  #    0x00D2  210 UINT16  2   R   Reserved
+# 0x12D4   212   UINT16    2    R    TimeEmergency   S
+  #    0x00D4  212 UINT16  2   R   Emergency switch time                               TimeEmergency       S
+
+# 0x12D6   214   UINT16    2    R    BatCurCorrect
+  #    0x00D6  214 UINT16  2   R   Discharge current correction factor                 BatDisCurCorrect
+
+# 0x12D8   216   UINT16    2    R    VolChargCur     mV
+  #    0x00D8  216 UINT16  2   R   Charging current sensor voltage                     VolChargCur         mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging current sensor voltage"   # VolChargCur
+  address: 0x12D8
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  state_class: measurement
+
+# 0x12DA   218   UINT16    2    R    VolDischargCur  mV
+  #    0x00DA  218 UINT16  2   R   Discharge current sensor voltage                    VolDischargCur      mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge current sensor voltage"   # VolDischargCur
+  address: 0x12DA
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  state_class: measurement
+
+  #    0x00DC  220 FLOAT   4   R   Battery voltage correction factor                   BatVolCorrect
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery voltage correction factor"   # BatVolCorrect
+  address: 0x12DC
+  register_type: holding
+  value_type: FP32
+  unit_of_measurement: ""
+# device_class: power_factor
+
+  #    0x00E4  228 UINT16  2   R   Battery voltage                                     BatVol              0.01V
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery voltage"   # BatVol
+  address: 0x12E4
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "V"
+  device_class: voltage
+  state_class: measurement
+  accuracy_decimals: 2
+  filters:
+    - multiply: 0.01
+
+
+  #    0x00E6  230 INT16   2   R   Heating current                                     HeatCurrent         mA
+  #    0x00EE  238 UINT8   2   R   Reserved RVD
+  #                UINT8       R   Charger status                                      ChargerPlugged          1: plugged in; 0: not plugged in
+  #    0x00F0  240 UINT32  4   R   System beat                                         SysRunTicks         0.1S
+
+
+  #    0x00F8  248 INT16   2   R   Battery temperature                                 TempBat3            0.1°C
+  #    0x00FA  250 INT16   2   R   Battery temperature                                 TempBat4            0.1°C
+  #    0x00FC  252 INT16   2   R   Battery temperature                                 TempBat5            0.1°C
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 3"   # TempBat3
+  address: 0x12F8
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 4"   # TempBat4
+  address: 0x12FA
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 5"   # TempBat5
+  address: 0x12FC
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+# 0x1400  0x0020  32  UINT32  4   R   Accumulated running time                            ODDRunTime S
+#         0x0024  36  UINT32  4   R   Power-on times                                      PWROnTimes times

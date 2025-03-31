@@ -1,0 +1,204 @@
+  # 0x1400  0x0000  0   ASCII   16  R   Manufacturer model                                  ManufacturerDeviceID
+  #         0x0010  16  ASCII   8   R   Hardware version number                             HardwareVersion
+  #         0x0018  24  ASCII   8   R   Software version number                             SoftwareVersion
+  #         0x0020  32  UINT32  4   R   Accumulated running time                            ODDRunTime S
+  #         0x0024  36  UINT32  4   R   Power-on times                                      PWROnTimes times
+  #         0x00B2  178 UINT8   2   RW  Serial port 1 protocol                              UART1MPRTOLNbr
+  #                     UINT8       RW  CAN protocol                                        CANMPRTOLNbr
+  #         0x00B4  180 UINT8   16  R   Serial port 1 protocol control                      UART1MPRTOLEnable
+  #         0x00D4  212 UINT8   2   RW  Serial port 2 protocol                              UART2MPRTOLNbr
+  #                     UINT8       R   Serial port 2 protocol control                      UART2MPRTOLEnable[0]
+  #         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
+  #                     UINT8           Dry node 1 trigger source                           DRY1Trigger
+  #         0x00E6  230 UINT8   2   RW  Dry node 2 trigger source                           DRY2Trigger
+  #                     UINT8       R   UART protocol library version                       UARTMPTLVer                
+  #         0x00E8  232 INT32   4   RW  LCD buzzer trigger value                            LCDBuzzerTriggerVal
+  #         0x00EC  236 INT32   4   RW  LCD buzzer recovery value                           LCDBuzzerReleaseVal
+  #         0x00F0  240 INT32   4   RW  Dry node 1 trigger value                            DRY1TriggerVal
+  #         0x00F4  244 INT32   4   RW  Dry node 1 trigger value                            DRY1ReleaseVal
+  #         0x00F8  248 INT32   4   RW  Dry node 2 trigger value                            DRY2TriggerVal
+  #         0x00FC  252 INT32   4   RW  Dry node 2 recovery value                           DRY2ReleaseVal
+  #         0x0100  256 INT32   4   RW  Data storage period                                 DataStoredPeriod
+  #         0x0104  260 UINT8   2   RW  Charging time                                       RCVTime             0.1H
+  #                                     Float charge time                                   RFVTime             0.1H
+  #         0x0106  262 UINT8   2   R   CAN protocol library version                        CANMPTLVer
+  #                                     Preserve RVD
+  # 0x1400  0x0000  0   ASCII   16  R   Manufacturer model                                  ManufacturerDeviceID
+  #         0x0010  16  ASCII   8   R   Hardware version number                             HardwareVersion
+  #         0x0018  24  ASCII   8   R   Software version number                             SoftwareVersion
+  #         0x0028  32  ASCII   16  R   Bluetooth name                                      BleName
+  #         0x0038  56  ASCII   16  R   Bluetooth PIN                                       BlePIN
+  #         0x0048  72  ASCII   8   R   First On Date                                       FirstOnDate
+  #         0x0050  80  ASCII   16  R   Serial No                                           SerialNo
+  #         0x0060  96  ASCII   16  R   User Private Data                                   UserPrivateData
+  #         0x0070  112 ASCII   16  R   Password                                            Password
+  #         0x0080  128 ASCII   16  R   User Data 2                                         UserData2
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} reg 0x1400 bulk data"
+  skip_updates: 2
+  address: 0x1400
+  register_type: holding
+  raw_encode: HEXBYTES
+  # value_type: U_DWORD
+  # device_class: timestamp
+  # state_class: measurement
+  # unit_of_measurement: "s"
+  # accuracy_decimals: 0
+  id: reg_0x1400_bulk_data
+  register_count: 0x48
+  response_size: 0x90
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Manufacturer model"
+  skip_updates: 2
+  address: 0x1400
+  offset: 0x0000
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+  # register_count: 0x90
+  # response_size: 0x0120
+  # register_count: 0x40
+  # response_size: 0x80
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Hardware version"
+  skip_updates: 2
+  # address: 0x1410
+  address: 0x1400
+  offset: 0x0010
+  register_type: holding
+  raw_encode: NONE
+  register_count: 4
+  response_size: 8
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Software version"
+  skip_updates: 2
+  # address: 0x1418
+  address: 0x1400
+  offset: 0x0018
+  register_type: holding
+  raw_encode: NONE
+  register_count: 4
+  response_size: 8
+
+#         0x0020  32  UINT32  4   R   Accumulated running time                            ODDRunTime S
+#         0x0024  36  UINT32  4   R   Power-on times                                      PWROnTimes times
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Accumulated running time"               #   ODDRunTime S
+#   # skip_updates: 720
+#   # address: 0x1420
+#   address: 0x1400
+#   offset: 0x0020
+#   register_type: holding
+#   # raw_encode: NONE
+#   raw_encode: HEXBYTES
+#   register_count: 2
+#   response_size: 4
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Power-on times"                         #   PWROnTimes times
+#   # skip_updates: 720
+#   # address: 0x1420
+#   address: 0x1400
+#   offset: 0x0020
+#   register_type: holding
+#   # raw_encode: NONE
+#   raw_encode: HEXBYTES
+#   register_count: 2
+#   response_size: 4
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Bluetooth name"
+  skip_updates: 2
+  # address: 0x1428
+  address: 0x1400
+  offset: 0x0028
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+  id: BLE_name
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Bluetooth PIN"
+  skip_updates: 2
+  # address: 0x1438
+  address: 0x1400
+  offset: 0x0038
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} First On Date"
+  skip_updates: 2
+  # address: 0x1448
+  address: 0x1400
+  offset: 0x0048
+  register_type: holding
+  raw_encode: NONE
+  register_count: 4
+  response_size: 8
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Serial No"
+  skip_updates: 2
+  # address: 0x1450
+  address: 0x1400
+  offset: 0x0050
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} User Private Data"
+  skip_updates: 2
+  # address: 0x1460
+  address: 0x1400
+  offset: 0x0060
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Password"
+  skip_updates: 2
+  # address: 0x1470
+  address: 0x1400
+  offset: 0x0070
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} User Data 2"
+  skip_updates: 2
+  # address: 0x1480
+  address: 0x1400
+  offset: 0x0080
+  register_type: holding
+  raw_encode: NONE
+  register_count: 8
+  response_size: 16
+  

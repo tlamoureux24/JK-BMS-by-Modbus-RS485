@@ -1,0 +1,256 @@
+#    0x008C  140 UINT32  4   R   Balance line resistance status                      CellWireResSta          BIT[n] is 1, indicating that the balance line alarm
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 1"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 2"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0002
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 3"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0004
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 4"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0008
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 5"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0010
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 6"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0020
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 7"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0040
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 8"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0080
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 9"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0100
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 10"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0200
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 11"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0400
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 12"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x0800
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 13"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x1000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 14"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x2000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 15"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x4000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 16"
+  address: 0x1200
+  offset: 0x008E
+  register_type: holding
+  bitmask: 0x8000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 17"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 18"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0002
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 19"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0004
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 20"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0008
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 21"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0010
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 22"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0020
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 23"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0040
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 24"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0080
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 25"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0100
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 26"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0200
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 27"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0400
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 28"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x0800
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 29"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x1000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 30"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x2000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 31"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x4000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status 32"
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  bitmask: 0x8000

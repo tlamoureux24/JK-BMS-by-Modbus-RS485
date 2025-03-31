@@ -1,0 +1,680 @@
+# 0x126A   106   UINT16    2    R    CellWireRes16   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 17 wire resistance"
+  address: 0x1200
+  offset: 0x006A
+  register_type: holding
+  value_type: U_WORD
+  register_count: 0x6A  # read up to CellVol15
+  response_size: 0xD4
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x126C   108   UINT16    2    R    CellWireRes17   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 18 wire resistance"
+  address: 0x1200
+  offset: 0x006C
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x126E   110   UINT16    2    R    CellWireRes18   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 19 wire resistance"
+  address: 0x1200
+  offset: 0x006E
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1270   112   UINT16    2    R    CellWireRes19   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 20 wire resistance"
+  address: 0x1200
+  offset: 0x0070
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1272   114   UINT16    2    R    CellWireRes20   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 21 wire resistance"
+  address: 0x1200
+  offset: 0x0072
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1274   116   UINT16    2    R    CellWireRes21   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 22 wire resistance"
+  address: 0x1200
+  offset: 0x0074
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1276   118   UINT16    2    R    CellWireRes22   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 23 wire resistance"
+  address: 0x1200
+  offset: 0x0076
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1278   120   UINT16    2    R    CellWireRes23   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 24 wire resistance"
+  address: 0x1200
+  offset: 0x0078
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x127A   122   UINT16    2    R    CellWireRes24   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 25 wire resistance"
+  address: 0x1200
+  offset: 0x007A
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x127C   124   UINT16    2    R    CellWireRes25   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 26 wire resistance"
+  address: 0x1200
+  offset: 0x007C
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x127E   126   UINT16    2    R    CellWireRes26   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 27 wire resistance"
+  address: 0x1200
+  offset: 0x007E
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1280   128   UINT16    2    R    CellWireRes27   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 28 wire resistance"
+  address: 0x1200
+  offset: 0x0080
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1282   130   UINT16    2    R    CellWireRes28   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 29 wire resistance"
+  address: 0x1200
+  offset: 0x0082
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1284   132   UINT16    2    R    CellWireRes29   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 30 wire resistance"
+  address: 0x1200
+  offset: 0x0084
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1286   134   UINT16    2    R    CellWireRes30   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 31 wire resistance"
+  address: 0x1200
+  offset: 0x0086
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1288   136   UINT16    2    R    CellWireRes31   mΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} cell 32 wire resistance"
+  address: 0x1200
+  offset: 0x0088
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "Ω"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+
+# 0x128A   138    INT16    2    R    TempMos         0.1 °C
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} mosfet temperature"
+  address: 0x1200
+  offset: 0x008A
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+  #    0x008C  140 UINT32  4   R   Balance line resistance status                      CellWireResSta          BIT[n] is 1, indicating that the balance line alarm
+# 0x128C   140   UINT32    4    R    CellWireResSta  Bit per Cell
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance status"   # CellWireResSta
+  # address: 0x128C
+  address: 0x1200
+  offset: 0x008C
+  register_type: holding
+  value_type: U_DWORD
+# device_class: enum
+  state_class: measurement
+
+# 0x1290   144   UINT32    4    R    BatVol          mV
+  #    0x0090  144 UINT32  4   R   Total battery voltage                               BatVol              mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Total battery voltage"   # BatVol
+  # address: 0x1290
+  address: 0x1200
+  offset: 0x0090
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "V"
+  device_class: voltage
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1294   148   UINT32    4    R    BatWatt         mW
+  #    0x0094  148 UINT32  4   R   Battery power                                       BatWatt             mW
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery power"   # BatWatt
+  # address: 0x1294
+  address: 0x1200
+  offset: 0x0094
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "W"
+  device_class: power
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x1298   152    INT32    4    R    BatCurrent      mA
+  #    0x0098  152 INT32   4   R   Battery current                                     BatCurrent          mA
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery current"   # BatCurrent
+  # address: 0x1298
+  address: 0x1200
+  offset: 0x0098
+  register_type: holding
+  value_type: S_DWORD
+  unit_of_measurement: "A"
+  device_class: current
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+  #    0x009C  156 INT16   2   R   Battery temperature                                 TempBat1            0.1°C
+  #    0x009E  158 INT16   2   R   Battery temperature                                 TempBat2            0.1°C
+# 0x129C   156    INT16    2    R    TempBat 1       0.1 °C
+# 0x129E   158    INT16    2    R    TempBat 2       0.1 °C
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 1"   # TempBat1
+  # address: 0x129C
+  address: 0x1200
+  offset: 0x009C
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 2"   # TempBat1
+  # address: 0x129E
+  address: 0x1200
+  offset: 0x009E
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+  # 0x12A0   160   UINT32    4    R    AlarmBitmask
+  #    0x00A0  160 UINT32  4   R   Balance line resistance is too large                AlarmWireRes            1: Fault; 0: Normal     BIT0
+  #                                MOS over temperature protection                     AlarmMosOTP             1: fault; 0: normal     BIT1
+  #                                The number of cells does not match the set value.   AlarmCellQuantity       1: Fault; 0: Normal     BIT2
+  #                                Current sensor abnormality                          AlarmCurSensorErr       1: fault; 0: normal     BIT3
+  #                                Single cell overvoltage protection                  AlarmCellOVP            1: fault; 0: normal     BIT4
+  #                                Battery overvoltage protection                      AlarmBatOVP             1: fault; 0: normal     BIT5
+  #                                Charging overcurrent protection                     AlarmChOCP              1: fault; 0: normal     BIT6
+  #                                Charging short circuit protection                   AlarmChSCP              1: fault; 0: normal     BIT7
+  #                                Charging over-temperature protection                AlarmChOTP              1: fault; 0: normal     BIT8
+  #                                Charging low temperature protection                 AlarmChUTP              1: fault; 0: normal     BIT9
+  #                                Internal communication abnormality                  AlarmCPUAuxCommuErr     1: Fault; 0: Normal     BIT10
+  #                                Cell undervoltage protection                        AlarmCellUVP            1: fault; 0: normal     BIT11
+  #                                Battery undervoltage protection                     AlarmBatUVP             1: fault; 0: normal     BIT12
+  #                                Discharge overcurrent protection                    AlarmDchOCP             1: fault; 0: normal     BIT13
+  #                                Discharge short circuit protection                  AlarmDchSCP             1: fault; 0: normal     BIT14
+  #                                Discharge over-temperature protection               AlarmDchOTP             1: fault; 0: normal     BIT15
+  #                                Charging tube abnormality                           AlarmChargeMOS          1: fault; 0: normal     BIT16
+  #                                Discharge tube abnormality                          AlarmDischargeMOS       1: fault; 0: normal     BIT17
+  #                                GPS disconnected                                    GPSDisconneted          1: fault; 0: normal     BIT18
+  #                                Please modify the authorization password in time    Modify PWD. in time     1: Fault; 0: Normal     BIT19
+  #                                Discharge start failure                             Discharge On Failed     1: Failure; 0: Normal   BIT20
+  #                                Battery over-temperature alarm                      Battery Over Temp Alarm 1: Fault; 0: Normal     BIT21
+  #                                Temperature sensor abnormality                      Temperature sensor anomaly
+  #                                Parallel module failure                             PLCModule anomaly
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} AlarmBitmask"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  value_type: U_DWORD
+
+# 0x12A4   164    INT16    2    R    BalanCurrent    mA
+  #    0x00A4  164 INT16   2   R   Balancing current                                   BalanCurrent        mA
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balancing current"   # BalanCurrent
+  # address: 0x12A4
+  address: 0x1200
+  offset: 0x00A4
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "A"
+  device_class: current
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+
+# 0x12A6   166 UINT8+UINT8 2    R    BalanStatatus (2:放电; 1:充电 ; 0:关闭) / SOCStateOfcharge %
+  #    0x00A6  166 UINT8   2   R   Balancing state                                     BalanSta            %   2: discharge; 1: charge; 0: off
+  #                UINT8       R   Remaining power                                     SOCStateOfcharge
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balancing state"     # BalanSta
+  # address: 0x12A6
+  address: 0x1200
+  offset: 0x00A6
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+# device_class: enum
+  state_class: measurement
+# accuracy_decimals: 0
+  bitmask: 0xFF00
+# filters:
+#   - offset: 1.0
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Remaining power"    # SOCStateOfcharge
+  # address: 0x12A6
+  address: 0x1200
+  offset: 0x00A6
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "%"
+  device_class: battery
+  state_class: measurement
+# accuracy_decimals: 0
+  bitmask: 0x00FF
+# filters:
+#   - offset: 1.0
+
+
+# 0x12A8   168    INT32    2    R    SOCCapRemain    mAH
+  #    0x00A8  168 INT32   4   R   Remaining capacity                                  SOCCapRemain        mAH
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Remaining capacity"     # SOCCapRemain
+  # address: 0x12A8
+  address: 0x1200
+  offset: 0x00A8
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "Ah"
+  device_class: energy_storage
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x12AC   172   UINT32    4    R    SOCFullChargeCap    mAH
+  #    0x00AC  172 UINT32  4   R   Actual battery capacity                             SOCFullChargeCap    mAH
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Actual battery capacity"     # SOCFullChargeCap
+  # address: 0x12AC
+  address: 0x1200
+  offset: 0x00AC
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "Ah"
+  device_class: energy_storage
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x12B0   176   UINT32    4    R    SOCCycleCount   次
+  #    0x00B0  176 UINT32  4   R   Number of cycles                                    SOCCycleCount       times
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Number of cycles"        # SOCCycleCount
+  # address: 0x12B0
+  address: 0x1200
+  offset: 0x00B0
+  register_type: holding
+  value_type: U_DWORD
+  state_class: measurement
+  accuracy_decimals: 0
+
+# 0x12B4   180   UINT32    4    R    SOCCycleCap     mAH
+  #    0x00B4  180 UINT32  4   R   Total cycle capacity                                SOCCycleCap         mAH
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Total cycle capacity"     # SOCCycleCap
+  # address: 0x12B4
+  address: 0x1200
+  offset: 0x00B4
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "Ah"
+  device_class: energy_storage
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+# 0x12B8   184 UINT8+UINT8 2    R    StateOfHealth % / Precharge stats (1:打开 ; 0:关闭)
+  #    0x00B8  184 UINT8   2   R   SOH estimate                                        SOCSOH %
+  #                UINT8       R   Pre-charge status                                   Precharge               1: open; 0: close
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} SOH estimate"        # SOCSOH
+  # address: 0x12B8
+  address: 0x1200
+  offset: 0x00B8
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "%"
+# state_class: measurement
+  accuracy_decimals: 0
+  bitmask: 0xFF00
+# filters:
+#   - offset: 1.0
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Pre-charge status"    # Precharge   1: open; 0: close
+  # address: 0x12B8
+  address: 0x1200
+  offset: 0x00B8
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+  state_class: measurement
+# accuracy_decimals: 0
+  bitmask: 0x00FF
+# filters:
+#   - offset: 1.0
+
+  #    0x00BA  186 UINT16  2   R   User layer alarm                                    UserAlarm
+# 0x12BA   186   UINT16    2    R    UserAlarm
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} User layer alarm"     # UserAlarm
+  # address: 0x12BA
+  address: 0x1200
+  offset: 0x00BA
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+  state_class: measurement
+
+# 0x12BC   188   UINT32    4    R    RunTime         S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} total runtime in seconds"
+  # address: 0x12BC
+  address: 0x1200
+  offset: 0x00BC
+  register_type: holding
+  value_type: U_DWORD
+# device_class: timestamp
+  state_class: measurement
+  unit_of_measurement: "s"
+  accuracy_decimals: 0
+  id: total_runtime
+
+  #    0x00C0  192 UINT8   2   R   Charge status                                       Charge                  1: open; 0: close
+  #                UINT8       R   Discharge status                                    Discharge               1: open; 0: close
+# 0x12C0   192 UINT8+UINT8 Charge (1:打开 ; 0:关闭) / Discharge (1:打开 ; 0:关闭)
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charge status"     # Charge
+  # address: 0x12C0
+  address: 0x1200
+  offset: 0x00C0
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+# state_class: measurement
+  accuracy_decimals: 0
+  bitmask: 0xFF00
+# filters:
+#   - offset: 1.0
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge status"    # Discharge
+  # address: 0x12C0
+  address: 0x1200
+  offset: 0x00C0
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+  state_class: measurement
+# accuracy_decimals: 0
+  bitmask: 0x00FF
+# filters:
+#   - offset: 1.0
+
+# 0x12C2   194   UINT16    2    R    UserAlarm2
+  #    0x00C2  194 UINT16  2   R   User layer alarm 2                                  UserAlarm2
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} User layer alarm 2"     # UserAlarm
+  # address: 0x12C2
+  address: 0x1200
+  offset: 0x00C2
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+  state_class: measurement
+
+# 0x12C4   196   UINT16    2    R    TimeDcOCPR      S
+  #    0x00C4  196 UINT16  2   R   Discharge overcurrent protection release time       TimeDcOCPR          S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge overcurrent protection release time"     # TimeDcOCPR
+  # address: 0x12CC
+  address: 0x1200
+  offset: 0x00CC
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "s"
+  state_class: measurement
+
+# 0x12C6   198   UINT16    2    R    TimeDcSCPR      S
+  #    0x00C6  198 UINT16  2   R   Discharge short circuit protection release time     TimeDcSCPR          S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge short circuit protection release time"     # TimeDcSCPR
+  # address: 0x12CC
+  address: 0x1200
+  offset: 0x00CC
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "s"
+  state_class: measurement
+
+# 0x12C8   200   UINT16    2    R    TimeCOCPR       S
+  #    0x00C8  200 UINT16  2   R   Charging overcurrent protection release time        TimeCOCPR           S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging overcurrent protection release time"     # TimeCOCPR
+  # address: 0x12C8
+  address: 0x1200
+  offset: 0x00C8
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "s"
+  state_class: measurement
+
+# 0x12CA   202   UINT16    2    R    TimeCSCPR       S
+  #    0x00CA  202 UINT16  2   R   Charging short circuit protection release time      TimeCSCPR           S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging short circuit protection release time"     # TimeCSCPR
+  # address: 0x12CA
+  address: 0x1200
+  offset: 0x00CA
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "s"
+  state_class: measurement
+
+# 0x12CC   204   UINT16    2    R    TimeUVPR        S
+  #    0x00CC  204 UINT16  2   R   Single undervoltage protection release time         TimeUVPR            S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Single undervoltage protection release time"     # TimeUVPR
+  # address: 0x12CC
+  address: 0x1200
+  offset: 0x00CC
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "s"
+  state_class: measurement
+
+# 0x12CE   206   UINT16    2    R    TimeOVPR        S
+  #    0x00CE  206 UINT16  2   R   Single overvoltage protection release time          TimeOVPR            S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Single overvoltage protection release time"     # TimeOVPR
+  # address: 0x12CE
+  address: 0x1200
+  offset: 0x00CE
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "s"
+  state_class: measurement

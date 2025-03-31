@@ -1,0 +1,248 @@
+#0x1000  0x0000  0   UINT32  4   RW  Entering sleep voltage                              VolSmartSleep       mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Entering sleep voltage"     # VolSmartSleep
+  id: VolSmartSleepS
+  address: 0x1000
+  register_count: 0x38
+  response_size: 0x70
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  # skip_updates: 1
+
+    #    0x0004  4   UINT32  4   RW  Cell undervoltage protection                        VolCellUV           mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Cell undervoltage protection"     # VolCellUV
+  id: VolCellUVS
+  # address: 0x1004
+  address: 0x1000
+  offset: 0x0004
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  # skip_updates: 1
+
+    #    0x0008  8   UINT32  4   RW  Cell undervoltage protection recovery               VolCellUVPR         mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Cell undervoltage protection recovery"     # VolCellUVPR
+  id: VolCellUVPRS
+  # address: 0x1008
+  address: 0x1000
+  offset: 0x0008
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  # skip_updates: 1
+
+    #    0x000C  12  UINT32  4   RW  Cell overcharge protection                          VolCellOV           mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Cell overcharge protection"     # VolCellOV
+  id: VolCellOVS
+  # address: 0x100C
+  address: 0x1000
+  offset: 0x000C
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  # skip_updates: 1
+
+    #    0x0010  16  UINT32  4   RW  Cell overcharge protection recovery voltage         VolCellOVPR         mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Cell overcharge protection recovery voltage"     # VolCellOVPR
+  id: VolCellOVPRS
+  # address: 0x1010
+  address: 0x1000
+  offset: 0x0010
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  # skip_updates: 1
+
+  #    0x0014  20  UINT32  4   RW  Trigger balanced voltage difference                 VolBalanTrig        mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Trigger balanced voltage difference"     # VolBalanTrig
+  id: VolBalanTrigS
+  # address: 0x1014
+  address: 0x1000
+  offset: 0x0014
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  # skip_updates: 1
+#  state_class: measurement
+#  filters:
+#    - multiply: 0.001
+
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} CellCount"
+  id: CellCountS
+  # address: 0x106C
+  address: 0x1000
+  offset: 0x006C
+  register_type: holding
+  value_type: U_DWORD
+  # skip_updates: 1
+
+    #    0x007C  124 UINT32  4   RW  Battery design capacity                             CapBatCell          mAH
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Battery design capacity"      # CapBatCell
+  id: CapBatCellS
+  address: 0x107C
+  # address: 0x1000
+  # offset: 0x007C
+  register_count: 0x4A
+  response_size: 0x94
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mAh"
+  state_class: measurement
+  # skip_updates: 0
+  # accuracy_decimals: 3
+  # filters:
+  #   - multiply: 0.001
+
+    #    0x0080  128 UINT32  4   RW  Short circuit protection delay                      SCPDelay            us
+    #    0x0084  132 UINT32  4   RW  Balanced start voltage                              VolStartBalan       mV
+    #    0x0088  136 UINT32  4   RW  Connection line internal resistance 0               CellConWireRes0     uΩ
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Connection line resistance 00"      # CellConWireRes00
+  id: CellConWireRes00S
+  # address: 0x1088
+  address: 0x107C
+  offset: 0x000C
+  # address: 0x1000
+  # offset: 0x0088
+  # register_count: 0x3C
+  # response_size: 0x78
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mΩ"
+  state_class: measurement
+  accuracy_decimals: 3
+  # skip_updates: 0
+  filters:
+    - multiply: 0.001
+
+    #    0x008C  140 UINT32  4   RW  Connection line internal resistance 1               CellConWireRes1     uΩ
+    #    0x0090  144 UINT32  4   RW  Connection line internal resistance 2               CellConWireRes2     uΩ
+    #    0x0094  148 UINT32  4   RW  Connection line internal resistance 3               CellConWireRes3     uΩ
+    #    0x0098  152 UINT32  4   RW  Connection line internal resistance 4               CellConWireRes4     uΩ
+    #    0x009C  156 UINT32  4   RW  Connection line internal resistance 5               CellConWireRes5     uΩ
+    #    0x00A0  160 UINT32  4   RW  Connection line internal resistance 6               CellConWireRes6     uΩ
+    #    0x00A4  164 UINT32  4   RW  Connection line internal resistance 7               CellConWireRes7     uΩ
+    #    0x00A8  168 UINT32  4   RW  Connection line internal resistance 8               CellConWireRes8     uΩ
+    #    0x00AC  172 UINT32  4   RW  Connection line internal resistance 9               CellConWireRes9     uΩ
+    #    0x00B0  176 UINT32  4   RW  Connection line internal resistance 10              CellConWireRes10    uΩ
+    #    0x00B4  180 UINT32  4   RW  Connection line internal resistance 11              CellConWireRes11    uΩ
+    #    0x00B8  184 UINT32  4   RW  Connection line internal resistance 12              CellConWireRes12    uΩ
+    #    0x00BC  188 UINT32  4   RW  Connection line internal resistance 13              CellConWireRes13    uΩ
+    #    0x00C0  192 UINT32  4   RW  Connection line internal resistance 14              CellConWireRes14    uΩ
+    #    0x00C4  196 UINT32  4   RW  Connection line internal resistance 15              CellConWireRes15    uΩ
+    #    0x00C8  200 UINT32  4   RW  Connection line internal resistance 16              CellConWireRes16    uΩ
+    #    0x00CC  204 UINT32  4   RW  Connection line internal resistance 17              CellConWireRes17    uΩ
+    #    0x00D0  208 UINT32  4   RW  Connection line internal resistance 18              CellConWireRes18    uΩ
+    #    0x00D4  212 UINT32  4   RW  Connection line internal resistance 19              CellConWireRes19    uΩ
+    #    0x00D8  216 UINT32  4   RW  Connection line internal resistance 20              CellConWireRes20    uΩ
+    #    0x00DC  220 UINT32  4   RW  Connection line internal resistance 21              CellConWireRes21    uΩ
+    #    0x00E0  224 UINT32  4   RW  Connection line internal resistance 22              CellConWireRes22    uΩ
+    #    0x00E4  228 UINT32  4   RW  Connection line internal resistance 23              CellConWireRes23    uΩ
+    #    0x00E8  232 UINT32  4   RW  Connection line internal resistance 24              CellConWireRes24    uΩ
+    #    0x00EC  236 UINT32  4   RW  Connection line internal resistance 25              CellConWireRes25    uΩ
+    #    0x00F0  240 UINT32  4   RW  Connection line internal resistance 26              CellConWireRes26    uΩ
+    #    0x00F4  244 UINT32  4   RW  Connection line internal resistance 27              CellConWireRes27    uΩ
+    #    0x00F8  248 UINT32  4   RW  Connection line internal resistance 28              CellConWireRes28    uΩ
+    #    0x00FC  252 UINT32  4   RW  Connection line internal resistance 29              CellConWireRes29    uΩ
+    #    0x0100  256 UINT32  4   RW  Connection line internal resistance 30              CellConWireRes30    uΩ
+    #    0x0104  260 UINT32  4   RW  Connection line internal resistance 31              CellConWireRes31    uΩ
+
+
+    #    0x0100  256 UINT32  4   RW  Connection line internal resistance 30              CellConWireRes30    uΩ
+    #    0x0104  260 UINT32  4   RW  Connection line internal resistance 31              CellConWireRes31    uΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Connection line resistance 30"      # CellConWireRes30
+  id: CellConWireRes30S
+  address: 0x1100
+  # address: 0x1100
+  offset: 0x0000
+  register_count: 0x10
+  response_size: 0x20
+  register_type: holding
+  value_type: U_DWORD
+  # skip_updates: 0
+  unit_of_measurement: "mΩ"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Connection line resistance 31"      # CellConWireRes31
+  id: CellConWireRes31S
+  # address: 0x1108
+  address: 0x1100
+  offset: 0x0004
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mΩ"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+  #    0x0108  264 UINT32  4   RW  Device address                                      DevAddr H
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Device address"      # DevAddr
+  id: DevAddrS
+  # address: 0x1108
+  address: 0x1100
+  offset: 0x0008
+  register_type: holding
+  value_type: U_DWORD
+  # skip_updates: 0
+
+  #    0x010C  268 UINT32  4   RW  Discharge precharge time                            TIMProdischarge     S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Discharge precharge time"      # TIMProdischarge
+  id: TIMProdischargeS
+  # address: 0x110C
+  address: 0x1100
+  offset: 0x000C
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "s"
+  # skip_updates: 0
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Config Switches Sensor"      # 
+  id: CfgSwS
+  # address: 0x1114
+  address: 0x1100
+  offset: 0x0014
+  register_type: holding
+  value_type: U_WORD
+  # skip_updates: 0
+  # use_write_multiple: true
+  # restore_value: true

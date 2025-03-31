@@ -1,0 +1,97 @@
+  # *  0x0070  112 UINT32  4   RW  Charging switch                                     BatChargeEN             1: open; 0: close      switch
+- platform: template
+  name: "${name} Charging switch"
+  # optimistic: true
+  lambda: |-
+    uint32_t BatChargeENB = id(BatChargeEN).state;
+    if (bitRead(BatChargeENB,0)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: BatChargeEN
+        value: !lambda |-
+          uint32_t BatChargeENB = id(BatChargeENS).state;
+          if (bitRead(BatChargeENB,0) == 0) {
+            return id(BatChargeENS).state + 1;
+          } else {
+            return id(BatChargeENS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: BatChargeEN
+        value: !lambda |-
+          uint32_t BatChargeENB = id(BatChargeENS).state;
+          if (bitRead(BatChargeENB,0) == 1) {
+            return id(BatChargeENS).state - 1;
+          } else {
+            return id(BatChargeENS).state;
+          }
+
+  # *  0x0074  116 UINT32  4   RW  Discharge switch                                    BatDisChargeEN          1: open; 0: close      switch
+- platform: template
+  name: "${name} Discharge switch"
+  # optimistic: true
+  lambda: |-
+    uint32_t BatDisChargeENB = id(BatDisChargeEN).state;
+    if (bitRead(BatDisChargeENB,0)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: BatDisChargeEN
+        value: !lambda |-
+          uint32_t BatDisChargeENB = id(BatDisChargeENS).state;
+          if (bitRead(BatDisChargeENB,0) == 0) {
+            return id(BatDisChargeENS).state + 1;
+          } else {
+            return id(BatDisChargeENS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: BatDisChargeEN
+        value: !lambda |-
+          uint32_t BatDisChargeENB = id(BatDisChargeENS).state;
+          if (bitRead(BatDisChargeENB,0) == 1) {
+            return id(BatDisChargeENS).state - 1;
+          } else {
+            return id(BatDisChargeENS).state;
+          }
+
+  # *  0x0078  120 UINT32  4   RW  Balance switch                                      BalanEN                 1: open; 0: close      switch
+- platform: template
+  name: "${name} Balance switch"
+  # optimistic: true
+  lambda: |-
+    uint32_t BalanENB = id(BalanEN).state;
+    if (bitRead(BalanENB,0)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: BalanEN
+        value: !lambda |-
+          uint32_t BalanENB = id(BalanENS).state;
+          if (bitRead(BalanENB,0) == 0) {
+            return id(BalanENS).state + 1;
+          } else {
+            return id(BalanENS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: BalanEN
+        value: !lambda |-
+          uint32_t BalanENB = id(BalanENS).state;
+          if (bitRead(BalanENB,0) == 1) {
+            return id(BalanENS).state - 1;
+          } else {
+            return id(BalanENS).state;
+          }
+
+

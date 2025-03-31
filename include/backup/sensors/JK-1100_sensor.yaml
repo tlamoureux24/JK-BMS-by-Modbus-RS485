@@ -1,0 +1,68 @@
+    #    0x0100  256 UINT32  4   RW  Connection line internal resistance 30              CellConWireRes30    uΩ
+    #    0x0104  260 UINT32  4   RW  Connection line internal resistance 31              CellConWireRes31    uΩ
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Connection line resistance 30"      # CellConWireRes30
+  id: CellConWireRes30S
+  address: 0x1100
+  # address: 0x1100
+  offset: 0x0000
+  register_count: 0x10
+  response_size: 0x20
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mΩ"
+  state_class: measurement
+  accuracy_decimals: 3
+  # filters:
+  #   - multiply: 0.001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Connection line resistance 31"      # CellConWireRes31
+  id: CellConWireRes31S
+  # address: 0x1108
+  address: 0x1100
+  offset: 0x0004
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "mΩ"
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+  #    0x0108  264 UINT32  4   RW  Device address                                      DevAddr H
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Device address"      # DevAddr
+  id: DevAddrS
+  # address: 0x1108
+  address: 0x1100
+  offset: 0x0008
+  register_type: holding
+  value_type: U_DWORD
+
+  #    0x010C  268 UINT32  4   RW  Discharge precharge time                            TIMProdischarge     S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Discharge precharge time"      # TIMProdischarge
+  id: TIMProdischargeS
+  # address: 0x110C
+  address: 0x1100
+  offset: 0x000C
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "s"
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Config Switches Sensor"      # 
+  id: CfgSwS
+  # address: 0x1114
+  address: 0x1100
+  offset: 0x0014
+  register_type: holding
+  value_type: U_WORD
+  # use_write_multiple: true
+  # restore_value: true

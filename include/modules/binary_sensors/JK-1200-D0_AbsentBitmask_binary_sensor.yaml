@@ -1,0 +1,137 @@
+# 0x12D0   208 UINT8+UINT8 2    R    AbsentBitmask (Bit0: MOS TempSensorAbsent, Bit1: BATTempSensor1Absent, Bit2: BATTempSensor2Absent, Bit4: BATTempSensor4Absent, Bit5: BATTempSensor5Absent) / Heating
+  #    0x00D0  208 UINT8   2   R   MOS temperature sensor                              MOSTempSensorAbsent                             BIT0
+  #                                Battery temperature sensor 1                        BATTempSensor1Absent    1: Normal; 0: Missing   BIT1
+  #                                Battery temperature sensor 2                        BATTempSensor2Absent    1: Normal; 0: Missing   BIT2
+  #                                Battery temperature sensor 3                        BATTempSensor3Absent    1: Normal; 0: Missing   BIT3
+  #                                Battery temperature sensor 4                        BATTempSensor4Absent    1: Normal; 0: Missing   BIT4
+  #                                Battery temperature sensor 5                        BATTempSensor5Absent    1: Normal; 0: Missing   BIT5
+  #                                Heating status                                      Heating                 1: On; 0: Off
+# 0x12D2   210   UINT16    2    R    Reserved
+  #    0x00D2  210 UINT16  2   R   Reserved
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} MOS temperature sensor Absent"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x0100
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature sensor 1 Absent"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x0200
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature sensor 2 Absent"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x0400
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature sensor 3 Absent"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x0800
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature sensor 4 Absent"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x1000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature sensor 5 Absent"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x2000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Heating status"
+  address: 0x1200
+  offset: 0x00D0
+  register_type: holding
+  bitmask: 0x4000
+
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 8"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x8000
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 9"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0001
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 10"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0002
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 11"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0004
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 12"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0008
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 13"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0010
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 14"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0020
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 15"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0040
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 16"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0080

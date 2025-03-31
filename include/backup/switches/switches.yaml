@@ -1,0 +1,510 @@
+  # *  0x0070  112 UINT32  4   RW  Charging switch                                     BatChargeEN             1: open; 0: close      switch
+  # *  0x0074  116 UINT32  4   RW  Discharge switch                                    BatDisChargeEN          1: open; 0: close      switch
+  # *  0x0078  120 UINT32  4   RW  Balance switch                                      BalanEN                 1: open; 0: close      switch
+
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} discharging"
+#   address: 0x1000
+#   offset: 0x0076
+#   register_type: holding
+#   # register_count: 0x02
+#   # value_type: U_DWORD
+#   # use_write_multiple: true
+#   bitmask: 0x0001
+
+    # *  0x0070  112 UINT32  4   RW  Charging switch                                     BatChargeEN             1: open; 0: close      switch
+    # *  0x0074  116 UINT32  4   RW  Discharge switch                                    BatDisChargeEN          1: open; 0: close      switch
+    # *  0x0078  120 UINT32  4   RW  Balance switch                                      BalanEN                 1: open; 0: close      switch
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging switch"
+  custom_command: [0x00, 0x03, 0x10, 0x70, 0x00, 0x02]
+  write_lambda: |-
+    payload.push_back(0x00);
+    payload.push_back(0x10);
+    payload.push_back(0x10);
+    payload.push_back(0x70);
+    payload.push_back(0x00);
+    payload.push_back(0x02);
+    payload.push_back(0x04);
+    payload.push_back(0x00);
+    payload.push_back(0x00);
+    payload.push_back(0x00);
+    payload.push_back(x);
+    return true;
+  lambda: |-
+    if (data.size() != 4 ) {
+      ESP_LOGE("Custom", "Invalid data size %d",data.size());
+      return {};
+    }
+    return (data[3] == 1);
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge switch"
+  custom_command: ["${modbus_contr_addr}", 0x03, 0x10, 0x74, 0x00, 0x02]
+  write_lambda: |-
+    payload.push_back(${modbus_contr_addr});
+    payload.push_back(0x10);
+    payload.push_back(0x10);
+    payload.push_back(0x74);
+    payload.push_back(0x00);
+    payload.push_back(0x02);
+    payload.push_back(0x04);
+    payload.push_back(0x00);
+    payload.push_back(0x00);
+    payload.push_back(0x00);
+    payload.push_back(x);
+    return true;
+  lambda: |-
+    if (data.size() != 4 ) {
+      ESP_LOGE("Custom", "Invalid data size %d",data.size());
+      return {};
+    }
+    return (data[3] == 1);
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance switch"
+  custom_command: [0x00, 0x03, 0x10, 0x78, 0x00, 0x02]
+  write_lambda: |-
+    payload.push_back(0x00);
+    payload.push_back(0x10);
+    payload.push_back(0x10);
+    payload.push_back(0x78);
+    payload.push_back(0x00);
+    payload.push_back(0x02);
+    payload.push_back(0x04);
+    payload.push_back(0x00);
+    payload.push_back(0x00);
+    payload.push_back(0x00);
+    payload.push_back(x);
+    return true;
+  lambda: |-
+    if (data.size() != 4 ) {
+      ESP_LOGE("Custom", "Invalid data size %d",data.size());
+      return {};
+    }
+    return (data[3] == 1);
+
+#        # 0x0114  276 UINT16  2   RW  Heating switch                                      HeatEN                  1: open; 0: close BIT0
+#        #                         RW  Temperature sensor shield                           Disable temp-sensor     1: open; 0: close BIT1
+#        #                         RW  GPS Heartbeat detection                             GPS Heartbeat           1: open; 0: close BIT2
+#        #                         RW  Multiplex port function                             Port Switch             1: RS485; 0: CAN BIT3
+#        #                         RW  The display is always on                            LCD Always On           1: On; 0: Off BIT4
+#        #                         RW  Dedicated charger identification                    Special Charger         1: open; 0: close BIT5
+#        #                         RW  Smart sleep                                         SmartSleep              1: open; 0: close BIT6
+#        #                         RW  Disable parallel current limiting                   DisablePCLModule        1: open; 0: close BIT7
+#        #                         RW  Data timing storage                                 TimedStoredData         1: open; 0: close BIT8
+#        #                         RW  Charging floating mode                              ChargingFloatMode       1: open; 0: close BIT9
+#        #                         RW                                                                              1: open; 0: close BIT10
+#        #                         RW  DRY ARM Intermittent                                DRYARMI                 1: open; 0: close BIT11
+#        #                         RW  Discharge OCP 2                                     DischargeOCP2           1: open; 0: close BIT12
+#        #                         RW  Discharge OCP 3                                     DischargeOCP3           1: open; 0: close BIT13
+# 
+
+- platform: template
+  name: "${name} Heating switch"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,0)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,0) == 0) {
+            return id(CfgSwS).state + 1;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,0) == 1) {
+            return id(CfgSwS).state - 1;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+- platform: template
+  name: "${name} Disable temperature sensor"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,1)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,1) == 0) {
+            return id(CfgSwS).state + 0x0002;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,2) == 1) {
+            return id(CfgSwS).state - 0x0002;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+# - platform: template
+#   name: "${name} GPS Heartbeat detection"
+#   # optimistic: true
+#   lambda: |-
+#     uint16_t CfgSwB = id(CfgSw).state;
+#     if (bitRead(CfgSwB,1)) {
+#       return true;
+#     } else {
+#       return false;
+#     }
+#   turn_on_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,2) == 0) {
+#             return id(CfgSwS).state + 0x0004;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+#   turn_off_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,1) == 1) {
+#             return id(CfgSwS).state - 0x0004;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+# 
+# - platform: template
+#   name: "${name} Multiplex port function"
+#   # optimistic: true
+#   lambda: |-
+#     uint16_t CfgSwB = id(CfgSw).state;
+#     if (bitRead(CfgSwB,3)) {
+#       return true;
+#     } else {
+#       return false;
+#     }
+#   turn_on_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,3) == 0) {
+#             return id(CfgSwS).state + 0x0008;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+#   turn_off_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,3) == 1) {
+#             return id(CfgSwS).state - 0x0008;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+
+- platform: template
+  name: "${name} Display always on"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,4)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,4) == 0) {
+            return id(CfgSwS).state + 0x0010;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,4) == 1) {
+            return id(CfgSwS).state - 0x0010;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+# - platform: template
+#   name: "${name} Special Charger"
+#   # optimistic: true
+#   lambda: |-
+#     uint16_t CfgSwB = id(CfgSw).state;
+#     if (bitRead(CfgSwB,5)) {
+#       return true;
+#     } else {
+#       return false;
+#     }
+#   turn_on_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,5) == 0) {
+#             return id(CfgSwS).state + 0x0020;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+#   turn_off_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,5) == 1) {
+#             return id(CfgSwS).state - 0x0020;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+
+- platform: template
+  name: "${name} Smart sleep"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,6)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,6) == 0) {
+            return id(CfgSwS).state + 0x0040;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,6) == 1) {
+            return id(CfgSwS).state - 0x0040;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+- platform: template
+  name: "${name} Disable PCL Module"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,7)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,7) == 0) {
+            return id(CfgSwS).state + 0x0080;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,7) == 1) {
+            return id(CfgSwS).state - 0x0080;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+- platform: template
+  name: "${name} Data timing storage"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,8)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,8) == 0) {
+            return id(CfgSwS).state + 0x0100;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,8) == 1) {
+            return id(CfgSwS).state - 0x0100;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+- platform: template
+  name: "${name} Charging floating mode"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,9)) {
+      return true;
+    } else {
+      return false;
+    }
+  turn_on_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,9) == 0) {
+            return id(CfgSwS).state + 0x0200;
+          } else {
+            return id(CfgSwS).state;
+          }
+  turn_off_action:
+    - number.set:
+        id: CfgSw
+        value: !lambda |-
+          uint16_t CfgSwB = id(CfgSwS).state;
+          if (bitRead(CfgSwB,9) == 1) {
+            return id(CfgSwS).state - 0x0200;
+          } else {
+            return id(CfgSwS).state;
+          }
+
+# - platform: template
+#   name: "${name} DRY ARM Intermittent"
+#   # optimistic: true
+#   lambda: |-
+#     uint16_t CfgSwB = id(CfgSw).state;
+#     if (bitRead(CfgSwB,11)) {
+#       return true;
+#     } else {
+#       return false;
+#     }
+#   turn_on_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,11) == 0) {
+#             return id(CfgSwS).state + 0x0800;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+#   turn_off_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,11) == 1) {
+#             return id(CfgSwS).state - 0x0800;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+# 
+# - platform: template
+#   name: "${name} Discharge OCP 2"
+#   # optimistic: true
+#   lambda: |-
+#     uint16_t CfgSwB = id(CfgSw).state;
+#     if (bitRead(CfgSwB,12)) {
+#       return true;
+#     } else {
+#       return false;
+#     }
+#   turn_on_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,12) == 0) {
+#             return id(CfgSwS).state + 0x1000;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+#   turn_off_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,12) == 1) {
+#             return id(CfgSwS).state - 0x1000;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+# 
+# - platform: template
+#   name: "${name} Discharge OCP 3"
+#   # optimistic: true
+#   lambda: |-
+#     uint16_t CfgSwB = id(CfgSw).state;
+#     if (bitRead(CfgSwB,13)) {
+#       return true;
+#     } else {
+#       return false;
+#     }
+#   turn_on_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,13) == 0) {
+#             return id(CfgSwS).state + 0x2000;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+#   turn_off_action:
+#     - number.set:
+#         id: CfgSw
+#         value: !lambda |-
+#           uint16_t CfgSwB = id(CfgSwS).state;
+#           if (bitRead(CfgSwB,13) == 1) {
+#             return id(CfgSwS).state - 0x2000;
+#           } else {
+#             return id(CfgSwS).state;
+#           }
+

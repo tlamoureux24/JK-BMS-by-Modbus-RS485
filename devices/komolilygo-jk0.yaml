@@ -1,0 +1,120 @@
+substitutions:
+  name: jk-bms0
+  modbus_contr_id: bms0
+  modbus_contr_addr: '0x00'
+  # modbus_contr_addr: '0x01'
+  device_description: "Monitor a JK-BMS (JK-PB series) via Modbus"
+#  tx_pin: GPIO16
+#  rx_pin: GPIO17
+
+esphome:
+  name: komolilygo-jk0
+  friendly_name: KomoLILYGO_JK0
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+    level: DEBUG
+    # level: VERY_VERBOSE
+
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "<your_generated_key>"
+
+ota:
+  - platform: esphome
+    password: "<your_ota_password>"
+
+wifi:
+  # ssid: !secret wifi_ssid
+  # password: !secret wifi_password
+  ssid: !secret wifi_ssid_pico
+  password: !secret wifi_password_pico
+  # priority: 5.0
+  # Nie usypiaj wifi
+  power_save_mode: none
+
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Komolilygo-Jk0 Fallback Hotspot"
+    password: "<your_hotspot_password>"
+
+captive_portal:
+
+output:
+  - platform: gpio
+    id: ENABLE_PIN # Enable the chip
+    pin:
+      number: GPIO19
+      inverted: true
+  - platform: gpio
+    id: SE_PIN # Enable autodirection
+    pin:
+      number: GPIO17
+      inverted: true
+  - platform: gpio
+    id: ENABLE_5V_PIN # Enable 5V pin for RS485 chip
+    pin:
+      number: GPIO16
+      inverted: true
+
+
+uart:
+  id: mod_uart
+  rx_pin: GPIO21
+  tx_pin: GPIO22
+  baud_rate: 115200
+  stop_bits: 1
+  parity: NONE
+  data_bits: 8
+  # rx_buffer_size: 512
+  rx_buffer_size: 1024
+  debug:
+#    direction: BOTH
+#    dummy_receiver: false
+    dummy_receiver: true
+#    after:
+#      delimiter: "\n"
+#    sequence:
+#      - lambda: UARTDebug::log_string(direction, bytes);
+
+modbus:
+  id: modbus1
+  uart_id: mod_uart
+
+modbus_controller:
+  - id: ${modbus_contr_id}
+    # Dip switch configuration of a single pack setup / address 0x01
+    #  1    2    4    5
+    #  on, off, off, off (0x01)
+    #
+    # Don't turn off all dip switches / don't use device address 0x00.
+    # This is the Modbus Master mode. You must select a device address
+    # between 0x01 and 0x0f so the BMS acts as Modbus Slave.
+    address: ${modbus_contr_addr}
+    # address: 0x00
+    modbus_id: modbus1
+    setup_priority: -10
+    update_interval: 10s
+    command_throttle: 75ms
+
+sensor: !include_dir_merge_list ./JK-BMS/include/full/sensors/
+binary_sensor: !include_dir_merge_list ./JK-BMS/include/full/binary_sensors/
+text_sensor: !include_dir_merge_list ./JK-BMS/include/full/text_sensors/
+number: !include_dir_merge_list ./JK-BMS/include/full/numbers/
+switch: !include_dir_merge_list ./JK-BMS/include/full/switches/
+select: !include_dir_merge_list ./JK-BMS/include/full/select/
+
+# sensor: !include_dir_merge_list ./JK-BMS/include/test/sensors/
+# binary_sensor: !include_dir_merge_list ./JK-BMS/include/test/binary_sensors/
+# text_sensor: !include_dir_merge_list ./JK-BMS/include/test/text_sensors/
+# number: !include_dir_merge_list ./JK-BMS/include/test/numbers/
+# switch: !include_dir_merge_list ./JK-BMS/include/test/switches/
+# select: !include_dir_merge_list ./JK-BMS/include/test/select/

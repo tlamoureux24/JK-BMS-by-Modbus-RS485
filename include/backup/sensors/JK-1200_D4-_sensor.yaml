@@ -1,0 +1,287 @@
+# 0x12D4   212   UINT16    2    R    TimeEmergency   S
+  #    0x00D4  212 UINT16  2   R   Emergency switch time                               TimeEmergency       S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Emergency switch time"             # TimeEmergency
+  # address: 0x12D4
+  # address: 0x1200
+  # offset: 0x00D4
+  address: 0x12D4
+  offset: 0x0000
+  register_type: holding
+  value_type: U_WORD
+  # register_count: 0x3A  # read up to PCLModuleSta 0x010C
+  # response_size: 0x74
+  # register_count: 0x2C  # read up to PCLModuleSta 0x010C
+  # response_size: 0x58
+  register_count: 0x24  # read up to PCLModuleSta 0x010C
+  response_size: 0x48
+  unit_of_measurement: "s"
+  state_class: measurement
+
+# 0x12D6   214   UINT16    2    R    BatCurCorrect
+  #    0x00D6  214 UINT16  2   R   Discharge current correction factor                 BatDisCurCorrect
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge current correction factor"   # BatDisCurCorrect
+  # address: 0x12D6
+  # address: 0x1200
+  # offset: 0x00D6
+  address: 0x12D4
+  offset: 0x0002
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+# device_class: power_factor
+
+# 0x12D8   216   UINT16    2    R    VolChargCur     mV
+  #    0x00D8  216 UINT16  2   R   Charging current sensor voltage                     VolChargCur         mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging current sensor voltage"   # VolChargCur
+  # address: 0x12D8
+  # address: 0x1200
+  # offset: 0x00D8
+  address: 0x12D4
+  offset: 0x0004
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  state_class: measurement
+
+# 0x12DA   218   UINT16    2    R    VolDischargCur  mV
+  #    0x00DA  218 UINT16  2   R   Discharge current sensor voltage                    VolDischargCur      mV
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge current sensor voltage"   # VolDischargCur
+  # address: 0x12DA
+  # address: 0x1200
+  # offset: 0x00DA
+  address: 0x12D4
+  offset: 0x0006
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "mV"
+  device_class: voltage
+  state_class: measurement
+
+  #    0x00DC  220 FLOAT   4   R   Battery voltage correction factor                   BatVolCorrect
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery voltage correction factor"   # BatVolCorrect
+  # address: 0x12DC
+  # address: 0x1200
+  # offset: 0x00DC
+  address: 0x12D4
+  offset: 0x0008
+  register_type: holding
+  value_type: FP32
+  unit_of_measurement: ""
+# device_class: power_factor
+
+  #    0x00E4  228 UINT16  2   R   Battery voltage                                     BatVol              0.01V
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery voltage"   # BatVol
+  # address: 0x12E4
+  # address: 0x1200
+  # offset: 0x00E4
+  address: 0x12D4
+  offset: 0x0010
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: "V"
+  device_class: voltage
+  state_class: measurement
+  accuracy_decimals: 2
+  filters:
+    - multiply: 0.01
+
+
+  #    0x00E6  230 INT16   2   R   Heating current                                     HeatCurrent         mA
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balancing current"   # BalanCurrent
+  # address: 0x12E6
+  # address: 0x1200
+  # offset: 0x00E6
+  address: 0x12D4
+  offset: 0x0012
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "A"
+  device_class: current
+  state_class: measurement
+  accuracy_decimals: 3
+  filters:
+    - multiply: 0.001
+
+  #    0x00EE  238 UINT8   2   R   Reserved RVD
+  #                UINT8       R   Charger status                                      ChargerPlugged          1: plugged in; 0: not plugged in
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Reserved RVD"     # 
+#   # address: 0x12EE
+#   address: 0x1200
+#   offset: 0x00EE
+#   register_type: holding
+#   value_type: U_WORD
+#   unit_of_measurement: ""
+# # state_class: measurement
+#   accuracy_decimals: 0
+#   bitmask: 0xFF00
+# # filters:
+# #   - offset: 1.0
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charger status"    # ChargerPlugged
+  # address: 0x12EE
+  # address: 0x1200
+  # offset: 0x00EE
+  address: 0x12D4
+  offset: 0x001A
+  register_type: holding
+  value_type: U_WORD
+  unit_of_measurement: ""
+  state_class: measurement
+# accuracy_decimals: 0
+  bitmask: 0x00FF
+# filters:
+#   - offset: 1.0
+
+  #    0x00F0  240 UINT32  4   R   System beat                                         SysRunTicks         0.1S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} System beat"
+  # address: 0x12F0
+  # address: 0x1200
+  # offset: 0x00F0
+  address: 0x12D4
+  offset: 0x001C
+  register_type: holding
+  value_type: U_DWORD
+# device_class: timestamp
+  state_class: measurement
+  unit_of_measurement: "s"
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+  id: SysRunTicks
+
+
+
+  #    0x00F8  248 INT16   2   R   Battery temperature                                 TempBat3            0.1°C
+  #    0x00FA  250 INT16   2   R   Battery temperature                                 TempBat4            0.1°C
+  #    0x00FC  252 INT16   2   R   Battery temperature                                 TempBat5            0.1°C
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 3"   # TempBat3
+  # address: 0x12F8
+  # address: 0x1200
+  # offset: 0x00F8
+  address: 0x12D4
+  offset: 0x0024
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 4"   # TempBat4
+  # address: 0x12FA
+  # address: 0x1200
+  # offset: 0x00FA
+  address: 0x12D4
+  offset: 0x0026
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery temperature 5"   # TempBat5
+  # address: 0x12FC
+  # address: 0x1200
+  # offset: 0x00FC
+  address: 0x12D4
+  offset: 0x0028
+  register_type: holding
+  value_type: S_WORD
+  unit_of_measurement: "°C"
+  device_class: temperature
+  state_class: measurement
+  accuracy_decimals: 1
+  filters:
+    - multiply: 0.1
+
+  #         0x0100  256 UINT32  4   R   RTC counter                                         RTCTicks                Starts counting from 2020-1-1
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} RTC counter"
+  # address: 0x1300
+  # address: 0x1200
+  # offset: 0x0100
+  address: 0x1300
+  offset: 0x0000
+  register_type: holding
+  value_type: U_DWORD
+  register_count: 0x0E  # read up to PCLModuleSta 0x010C
+  response_size: 0x1C
+# device_class: timestamp
+  state_class: measurement
+  unit_of_measurement: "s"
+  accuracy_decimals: 0
+  id: RTCTicks
+
+  #         0x0108  264 UINT32  4   R   Sleep time                                          TimeEnterSleep      S
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Sleep time"
+  # address: 0x1308
+  # address: 0x1200
+  # offset: 0x0108
+  address: 0x1300
+  offset: 0x0008
+  register_type: holding
+  value_type: U_DWORD
+# device_class: timestamp
+  state_class: measurement
+  unit_of_measurement: "s"
+  accuracy_decimals: 0
+  id: TimeEnterSleep
+
+  #         0x010C  268 UINT8   2   R   Parallel current limiting module status             PCLModuleSta            1: open; 0: close
+  #                     UINT8           Reserved RVD
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Parallel current limiting module status"     # 
+  # address: 0x130C
+  # address: 0x1200
+  # offset: 0x010C
+  address: 0x1300
+  offset: 0x000C
+  register_type: holding
+  value_type: U_WORD
+  bitmask: 0xFF00
+
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Charger status"    # ChargerPlugged
+#   # address: 0x130C
+#   address: 0x1200
+#   offset: 0x010C
+#   register_type: holding
+#   value_type: U_WORD
+#   bitmask: 0x00FF

@@ -1,0 +1,56 @@
+# 0x1400  0x0000  0   ASCII   16  R   Manufacturer model                                  ManufacturerDeviceID
+#         0x0010  16  ASCII   8   R   Hardware version number                             HardwareVersion
+#         0x0018  24  ASCII   8   R   Software version number                             SoftwareVersion
+#         ----------------------------
+#         0x0020  32  UINT32  4   R   Accumulated running time                            ODDRunTime S
+#         0x0024  36  UINT32  4   R   Power-on times                                      PWROnTimes times
+#         [...]
+#         0x00B2  178 UINT8   2   RW  Serial port 1 protocol                              UART1MPRTOLNbr
+#                     UINT8       RW  CAN protocol                                        CANMPRTOLNbr
+#         0x00B4  180 UINT8   16  R   Serial port 1 protocol control                      UART1MPRTOLEnable
+#         0x00D4  212 UINT8   2   RW  Serial port 2 protocol                              UART2MPRTOLNbr
+#                     UINT8       R   Serial port 2 protocol control                      UART2MPRTOLEnable[0]
+#         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
+#                     UINT8           Dry node 1 trigger source                           DRY1Trigger
+#         0x00E6  230 UINT8   2   RW  Dry node 2 trigger source                           DRY2Trigger
+#                     UINT8       R   UART protocol library version                       UARTMPTLVer                
+#         0x00E8  232 INT32   4   RW  LCD buzzer trigger value                            LCDBuzzerTriggerVal
+#         0x00EC  236 INT32   4   RW  LCD buzzer recovery value                           LCDBuzzerReleaseVal
+#         0x00F0  240 INT32   4   RW  Dry node 1 trigger value                            DRY1TriggerVal
+#         0x00F4  244 INT32   4   RW  Dry node 1 trigger value                            DRY1ReleaseVal
+#         0x00F8  248 INT32   4   RW  Dry node 2 trigger value                            DRY2TriggerVal
+#         0x00FC  252 INT32   4   RW  Dry node 2 recovery value                           DRY2ReleaseVal
+#         0x0100  256 INT32   4   RW  Data storage period                                 DataStoredPeriod
+#         0x0104  260 UINT8   2   RW  Charging time                                       RCVTime             0.1H
+#                                     Float charge time                                   RFVTime             0.1H
+#         0x0106  262 UINT8   2   R   CAN protocol library version                        CANMPTLVer
+#                                     Preserve RVD
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Accumulated running time"   # ODDRunTime
+  id: ODDRunTime
+  # address: 0x1420
+  address: 0x1400       # it's working because full set of registers is read in text_sensor
+  offset: 0x0020
+  register_count: 0x08  # 
+  response_size: 0x10
+  register_type: holding
+  value_type: U_DWORD
+  unit_of_measurement: "s"
+# device_class: timestamp
+  state_class: measurement
+  accuracy_decimals: 0
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Power-on times"                            # PWROnTimes
+  # address: 0x1424
+  address: 0x1400
+  offset: 0x0024
+  register_type: holding
+  value_type: U_DWORD
+# register_count: 32  # read up to CellVol31
+  # unit_of_measurement: "s"
+# device_class:
+  state_class: measurement

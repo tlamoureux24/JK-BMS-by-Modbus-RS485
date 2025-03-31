@@ -1,0 +1,226 @@
+    #    0x0114  276 UINT16  2   RW  Heating switch                                      HeatEN                  1: open; 0: close BIT0
+    #                            RW  Temperature sensor shield                           Disable temp-sensor     1: open; 0: close BIT1
+    #                            RW  GPS Heartbeat detection                             GPS Heartbeat           1: open; 0: close BIT2
+    #                            RW  Multiplex port function                             Port Switch             1: RS485; 0: CAN BIT3
+    #                            RW  The display is always on                            LCD Always On           1: On; 0: Off BIT4
+    #                            RW  Dedicated charger identification                    Special Charger         1: open; 0: close BIT5
+    #                            RW  Smart sleep                                         SmartSleep              1: open; 0: close BIT6
+    #                            RW  Disable parallel current limiting                   DisablePCLModule        1: open; 0: close BIT7
+    #                            RW  Data timing storage                                 TimedStoredData         1: open; 0: close BIT8
+    #                            RW  Charging floating mode                              ChargingFloatMode       1: open; 0: close BIT9
+    #                            RW                                                                              1: open; 0: close BIT10
+    #                            RW  DRY ARM Intermittent                                DRYARMI                 1: open; 0: close BIT11
+    #                            RW  Discharge OCP 2                                     DischargeOCP2           1: open; 0: close BIT12
+    #                            RW  Discharge OCP 3                                     DischargeOCP3           1: open; 0: close BIT13
+- platform: template
+  name: "${name} DRY ARM Intermittent"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,11)) {
+      return true;
+    } else {
+      return false;
+    }
+  # turn_on_action:
+  #   - number.set:
+  #       id: CfgSw
+  #       value: !lambda |-
+  #         uint16_t CfgSwB = id(CfgSwS).state;
+  #         if (bitRead(CfgSwB,11) == 0) {
+  #           return id(CfgSwS).state + 0x0800;
+  #         }
+  # turn_off_action:
+  #   - number.set:
+  #       id: CfgSw
+  #       value: !lambda |-
+  #         uint16_t CfgSwB = id(CfgSwS).state;
+  #         if (bitRead(CfgSwB,11) == 1) {
+  #           return id(CfgSwS).state - 0x0800;
+  #         }
+
+- platform: template
+  name: "${name} Discharge OCP 2"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,12)) {
+      return true;
+    } else {
+      return false;
+    }
+  # turn_on_action:
+  #   - number.set:
+  #       id: CfgSw
+  #       value: !lambda |-
+  #         uint16_t CfgSwB = id(CfgSwS).state;
+  #         if (bitRead(CfgSwB,12) == 0) {
+  #           return id(CfgSwS).state + 0x1000;
+  #         }
+  # turn_off_action:
+  #   - number.set:
+  #       id: CfgSw
+  #       value: !lambda |-
+  #         uint16_t CfgSwB = id(CfgSwS).state;
+  #         if (bitRead(CfgSwB,12) == 1) {
+  #           return id(CfgSwS).state - 0x1000;
+  #         }
+
+- platform: template
+  name: "${name} Discharge OCP 3"
+  # optimistic: true
+  lambda: |-
+    uint16_t CfgSwB = id(CfgSw).state;
+    if (bitRead(CfgSwB,13)) {
+      return true;
+    } else {
+      return false;
+    }
+  # turn_on_action:
+  #   - number.set:
+  #       id: CfgSw
+  #       value: !lambda |-
+  #         uint16_t CfgSwB = id(CfgSwS).state;
+  #         if (bitRead(CfgSwB,13) == 0) {
+  #           return id(CfgSwS).state + 0x2000;
+  #         }
+  # turn_off_action:
+  #   - number.set:
+  #       id: CfgSw
+  #       value: !lambda |-
+  #         uint16_t CfgSwB = id(CfgSwS).state;
+  #         if (bitRead(CfgSwB,13) == 1) {
+  #           return id(CfgSwS).state - 0x2000;
+  #         }
+
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   # name: "${name} Heating switch"
+#   id: HeatEN
+#   address: 0x1114
+#   # offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0001
+#   # entity_category: config
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery temperature sensor 1 Absent"
+#   address: 0x1100
+#   offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0002
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery temperature sensor 2 Absent"
+#   address: 0x1100
+#   offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0004
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery temperature sensor 3 Absent"
+#   address: 0x1100
+#   offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0008
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   # name: "${name} Display always on"
+#   id: LCDAlwaysOn
+#   address: 0x1114
+#   # offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0010
+#   # entity_category: config
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Battery temperature sensor 5 Absent"
+#   address: 0x1100
+#   offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0020
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Heating status"
+#   address: 0x1100
+#   offset: 0x0014
+#   register_type: holding
+#   bitmask: 0x0040
+
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 8"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0080
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 9"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0001
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 10"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0002
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 11"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0004
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 12"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0008
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 13"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0010
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 14"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0020
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 15"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0040
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 16"
+#   address: 0x1200
+#   offset: 0x00D0
+#   register_type: holding
+#   bitmask: 0x0080

@@ -1,0 +1,19 @@
+- platform: template
+  name: "${name} total runtime formatted"
+  update_interval: 60s
+# device_class: timestamp
+  lambda: |-
+    std::string value = "Unknown";
+    if (id(total_runtime) && !isnan(id(total_runtime).state)) {
+      int seconds = (int) id(total_runtime).state;
+      int years = seconds / (24 * 3600 * 365);
+      seconds = seconds % (24 * 3600 * 365);
+      int days = seconds / (24 * 3600);
+      seconds = seconds % (24 * 3600);
+      int hours = seconds / 3600;
+      seconds = seconds % 3600;
+      int minutes = seconds / 60;
+      value = (years ? to_string(years) + "y " : "") + (days ? to_string(days) + "d " : "") +
+              (hours ? to_string(hours) + "h " : "") + (minutes ? to_string(minutes) + "m" : "");
+    }
+    return value;

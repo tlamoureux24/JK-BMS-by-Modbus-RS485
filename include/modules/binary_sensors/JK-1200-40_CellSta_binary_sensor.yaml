@@ -1,0 +1,257 @@
+#    0x0040  64  UINT32  4   R   Battery status                                      CellSta                 BIT[n] is 1, indicating that the battery exists
+# 0x1240   64    UINT32    4    R    CellStatus    (each bit indicates a attached cell)
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 1"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 2"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0002
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 3"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0004
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 4"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0008
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 5"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0010
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 6"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0020
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 7"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0040
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 8"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0080
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 9"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0100
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 10"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0200
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 11"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0400
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 12"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x0800
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 13"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x1000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 14"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x2000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 15"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x4000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 16"
+  address: 0x1200
+  offset: 0x0042
+  register_type: holding
+  bitmask: 0x8000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 17"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 18"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0002
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 19"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0004
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 20"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0008
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 21"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0010
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 22"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0020
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 23"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0040
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 24"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0080
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 25"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0100
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 26"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0200
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 27"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0400
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 28"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x0800
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 29"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x1000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 30"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x2000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 31"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x4000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery status 32"
+  address: 0x1200
+  offset: 0x0040
+  register_type: holding
+  bitmask: 0x8000

@@ -1,0 +1,329 @@
+# 0x1400  0x0000  0   ASCII   16  R   Manufacturer model                                  ManufacturerDeviceID
+#         0x0010  16  ASCII   8   R   Hardware version number                             HardwareVersion
+#         0x0018  24  ASCII   8   R   Software version number                             SoftwareVersion
+#         ----------------------------
+#         0x0020  32  UINT32  4   R   Accumulated running time                            ODDRunTime S
+#         0x0024  36  UINT32  4   R   Power-on times                                      PWROnTimes times
+#         [...]
+#         0x00B2  178 UINT8   2   RW  Serial port 1 protocol                              UART1MPRTOLNbr
+#                     UINT8       RW  CAN protocol                                        CANMPRTOLNbr
+#         0x00B4  180 UINT8   16  R   Serial port 1 protocol control                      UART1MPRTOLEnable
+#         0x00D4  212 UINT8   2   RW  Serial port 2 protocol                              UART2MPRTOLNbr
+#                     UINT8       R   Serial port 2 protocol control                      UART2MPRTOLEnable[0]
+#         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
+#                     UINT8           Dry node 1 trigger source                           DRY1Trigger
+#         0x00E6  230 UINT8   2   RW  Dry node 2 trigger source                           DRY2Trigger
+#                     UINT8       R   UART protocol library version                       UARTMPTLVer                
+#         0x00E8  232 INT32   4   RW  LCD buzzer trigger value                            LCDBuzzerTriggerVal
+#         0x00EC  236 INT32   4   RW  LCD buzzer recovery value                           LCDBuzzerReleaseVal
+#         0x00F0  240 INT32   4   RW  Dry node 1 trigger value                            DRY1TriggerVal
+#         0x00F4  244 INT32   4   RW  Dry node 1 trigger value                            DRY1ReleaseVal
+#         0x00F8  248 INT32   4   RW  Dry node 2 trigger value                            DRY2TriggerVal
+#         0x00FC  252 INT32   4   RW  Dry node 2 recovery value                           DRY2ReleaseVal
+#         0x0100  256 INT32   4   RW  Data storage period                                 DataStoredPeriod
+#         0x0104  260 UINT8   2   RW  Charging time                                       RCVTime             0.1H
+#                                     Float charge time                                   RFVTime             0.1H
+#         0x0106  262 UINT8   2   R   CAN protocol library version                        CANMPTLVer
+#                                     Preserve RVD
+
+#         0x00B2  178 UINT8   2   RW  Serial port 1 protocol                              UART1MPRTOLNbr
+#                     UINT8       RW  CAN protocol                                        CANMPRTOLNbr
+#
+#     This register looks not writable:
+#     
+#     [D][uart_debug:114]: >>> 01:10:14:B2:00:01:02:01:02:69:D2
+#     [D][modbus:136]: Modbus error function code: 0x90 exception: 3
+#     [E][modbus_controller:094]: Modbus error function code: 0x10 exception: 3 
+#     [E][modbus_controller:103]: Modbus error - last command: function code=0x10  register address = 0x14B2  registers count=1 payload size=2
+#     [D][uart_debug:114]: <<< 01:90:03:0C:01
+#
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Serial port 1 protocol"   # UART1MPRTOLNbr
+#   address: 0x14B2
+#   bitmask: 0xFF00
+#   register_type: holding
+#   value_type: U_WORD
+#   # unit_of_measurement: "s"
+#   use_write_multiple: true
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} CAN protocol"   # CANMPRTOLNbr
+#   address: 0x14B2
+#   bitmask: 0x00FF
+#   register_type: holding
+#   value_type: U_WORD
+#   use_write_multiple: true
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Serial port 1 protocol"   # UART1MPRTOLNbr
+  id: UART1MPRTOLNbr_CANMPRTOLNbr
+  address: 0x14B2
+  bitmask: 0xFF00
+  register_type: holding
+  value_type: U_WORD
+  # unit_of_measurement: "s"
+  use_write_multiple: true
+
+- platform: template
+  name: "${name} Serial port 1 protocol"   # UART1MPRTOLNbr
+  min_value: 0
+  max_value: 15
+  # multiply: 10
+  step: 1
+  mode: box
+  update_interval: 5s
+  lambda: |-
+    return (id(UART1MPRTOLNbrS).state);
+  set_action:
+    - number.set:
+        id: UART1MPRTOLNbr_CANMPRTOLNbr
+        value: !lambda |-
+          uint16_t b = id(CANMPRTOLNbrS).state;
+          return ((x * 0x0100) + b);
+
+- platform: template
+  name: "${name} CAN protocol"   # CANMPRTOLNbr
+  min_value: 0
+  max_value: 12
+  # multiply: 10
+  step: 1
+  mode: box
+  update_interval: 5s
+  lambda: |-
+    return (id(CANMPRTOLNbrS).state);
+  set_action:
+    - number.set:
+        id: UART1MPRTOLNbr_CANMPRTOLNbr
+        value: !lambda |-
+          uint16_t a = id(UART1MPRTOLNbrS).state;
+          return ((a * 0x0100) + x);
+
+#         0x00D4  212 UINT8   2   RW  Serial port 2 protocol                              UART2MPRTOLNbr
+#                     UINT8       R   Serial port 2 protocol control                      UART2MPRTOLEnable[0]
+#
+#     This register looks not writable:
+#
+#     [D][uart_debug:114]: >>> 01:10:14:D4:00:01:02:02:FF:A1:65
+#     [D][modbus:136]: Modbus error function code: 0x90 exception: 2
+#     [E][modbus_controller:094]: Modbus error function code: 0x10 exception: 2 
+#     [E][modbus_controller:103]: Modbus error - last command: function code=0x10  register address = 0x14D4  registers count=1 payload size=2
+#     [D][uart_debug:114]: <<< 01:90:02:CD:C1
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Serial port 2 protocol"   # UART2MPRTOLNbr
+#   address: 0x14D4
+#   bitmask: 0xFF00
+#   register_type: holding
+#   value_type: U_WORD
+#   use_write_multiple: true
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Serial port 2 protocol control"   # UART2MPRTOLEnable
+#   address: 0x14D4
+#   bitmask: 0x00FF
+#   register_type: holding
+#   value_type: U_WORD
+#   use_write_multiple: true
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Serial port 2 protocol"   # UART2MPRTOLNbr
+  id: UART2MPRTOLNbr_UART2MPRTOLEnable
+  address: 0x14D4
+  bitmask: 0xFF00
+  register_type: holding
+  value_type: U_WORD
+  use_write_multiple: true
+
+- platform: template
+  name: "${name} Serial port 2 protocol"   # UART2MPRTOLNbr
+  min_value: 0
+  max_value: 15
+  # multiply: 10
+  step: 1
+  mode: box
+  update_interval: 10s
+  lambda: |-
+    return (id(UART2MPRTOLNbrS).state);
+  set_action:
+    - number.set:
+        id: UART2MPRTOLNbr_UART2MPRTOLEnable
+        value: !lambda |-
+          uint16_t b = id(UART2MPRTOLEnableS).state;
+          return ((x * 0x0100) + b);
+
+#         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
+#                     UINT8           Dry node 1 trigger source                           DRY1Trigger
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} LCD buzzer trigger source"   # LCDBuzzerTrigger
+#   address: 0x14E4
+#   bitmask: 0xFF00
+#   register_type: holding
+#   value_type: U_WORD
+#   use_write_multiple: true
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} Dry node 1 trigger source"   # DRY1Trigger
+#   address: 0x14E4
+#   bitmask: 0x00FF
+#   register_type: holding
+#   value_type: U_WORD
+#   use_write_multiple: true
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} LCD Dry node 1 buzzer trigger source"   # 
+  id: LCDBuzzerTrigger_DRY1Trigger
+  address: 0x14E4
+  register_type: holding
+  value_type: U_WORD
+  use_write_multiple: true
+
+- platform: template
+  name: "${name} LCD buzzer trigger source"   # LCDBuzzerTrigger
+  min_value: 0
+  max_value: 12
+  # multiply: 10
+  step: 1
+  mode: box
+  update_interval: 5s
+  lambda: |-
+    return (id(LCDBuzzerTriggerS).state);
+  set_action:
+    - number.set:
+        id: LCDBuzzerTrigger_DRY1Trigger
+        value: !lambda |-
+          uint16_t b = id(DRY1TriggerS).state;
+          return ((x * 0x0100) + b);
+
+- platform: template
+  name: "${name} Dry node 1 trigger source"   # RCVTime
+  min_value: 0
+  max_value: 12
+  # multiply: 10
+  step: 1
+  mode: box
+  update_interval: 5s
+  lambda: |-
+    return (id(DRY1TriggerS).state);
+  set_action:
+    - number.set:
+        id: LCDBuzzerTrigger_DRY1Trigger
+        value: !lambda |-
+          uint16_t a = id(LCDBuzzerTriggerS).state;
+          return ((a * 0x0100) + x);
+
+
+#         0x00E6  230 UINT8   2   RW  Dry node 2 trigger source                           DRY2Trigger
+#                     UINT8       R   UART protocol library version                       UARTMPTLVer                
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  # name: "${name} Dry node 2 trigger source"   # DRY2Trigger
+  id: DRY2Trigger_UARTMPTLVer
+  address: 0x14E6
+  # bitmask: 0xFF00
+  register_type: holding
+  value_type: U_WORD
+  use_write_multiple: true
+
+- platform: template
+  name: "${name} Dry node 2 trigger source"   # DRY2Trigger
+  min_value: 0
+  max_value: 12
+  # multiply: 10
+  step: 1
+  mode: box
+  update_interval: 5s
+  lambda: |-
+    return (id(DRY2TriggerS).state);
+  set_action:
+    - number.set:
+        id: DRY2Trigger_UARTMPTLVer
+        value: !lambda |-
+          uint16_t b = id(UARTMPTLVerS).state;
+          return ((x * 0x0100) + b);
+
+#         0x00E8  232 INT32   4   RW  LCD buzzer trigger value                            LCDBuzzerTriggerVal
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} LCD buzzer trigger value"      # LCDBuzzerTriggerVal
+  address: 0x14E8
+  register_type: holding
+  value_type: S_DWORD
+  use_write_multiple: true
+  # skip_updates: 10
+  # unit_of_measurement: "mV"
+  # multiply: 1000
+  # step: 0.001
+
+#         0x00EC  236 INT32   4   RW  LCD buzzer recovery value                           LCDBuzzerReleaseVal
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} LCD buzzer recovery value"      # LCDBuzzerReleaseVal
+  address: 0x14EC
+  register_type: holding
+  value_type: S_DWORD
+  use_write_multiple: true
+  # skip_updates: 10
+  # unit_of_measurement: "mV"
+  # multiply: 1000
+  # step: 0.001
+
+#         0x00F0  240 INT32   4   RW  Dry node 1 trigger value                            DRY1TriggerVal
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Dry node 1 trigger value"      # DRY1TriggerVal
+  address: 0x14F0
+  register_type: holding
+  value_type: S_DWORD
+  use_write_multiple: true
+  # skip_updates: 10
+  # unit_of_measurement: "mV"
+  # multiply: 1000
+  # step: 0.001
+
+#         0x00F4  244 INT32   4   RW  Dry node 1 trigger value                            DRY1ReleaseVal
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Dry node 1 trigger recovery value"      # DRY1ReleaseVal
+  address: 0x14F4
+  register_type: holding
+  value_type: S_DWORD
+  use_write_multiple: true
+  # skip_updates: 10
+  # unit_of_measurement: "mV"
+  # multiply: 1000
+  # step: 0.001
+
+#         0x00F8  248 INT32   4   RW  Dry node 2 trigger value                            DRY2TriggerVal
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Dry node 2 trigger value"      # DRY2TriggerVal
+  address: 0x14F8
+  register_type: holding
+  value_type: S_DWORD
+  use_write_multiple: true
+  # skip_updates: 10
+  # unit_of_measurement: "mV"
+  # multiply: 1000
+  # step: 0.001
+
+#         0x00FC  252 INT32   4   RW  Dry node 2 recovery value                           DRY2ReleaseVal
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Dry node 2 trigger recovery value"      # DRY2ReleaseVal
+  address: 0x14FC
+  register_type: holding
+  value_type: S_DWORD
+  use_write_multiple: true
+  # skip_updates: 10
+  # unit_of_measurement: "mV"
+  # multiply: 1000
+  # step: 0.001

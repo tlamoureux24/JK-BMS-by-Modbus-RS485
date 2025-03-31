@@ -1,0 +1,279 @@
+  #    0x00A0  160 UINT32  4   R   Balance line resistance is too large                AlarmWireRes            1: Fault; 0: Normal     BIT0
+  #                                MOS over temperature protection                     AlarmMosOTP             1: fault; 0: normal     BIT1
+  #                                The number of cells does not match the set value.   AlarmCellQuantity       1: Fault; 0: Normal     BIT2
+  #                                Current sensor abnormality                          AlarmCurSensorErr       1: fault; 0: normal     BIT3
+  #                                Single cell overvoltage protection                  AlarmCellOVP            1: fault; 0: normal     BIT4
+  #                                Battery overvoltage protection                      AlarmBatOVP             1: fault; 0: normal     BIT5
+  #                                Charging overcurrent protection                     AlarmChOCP              1: fault; 0: normal     BIT6
+  #                                Charging short circuit protection                   AlarmChSCP              1: fault; 0: normal     BIT7
+  #                                Charging over-temperature protection                AlarmChOTP              1: fault; 0: normal     BIT8
+  #                                Charging low temperature protection                 AlarmChUTP              1: fault; 0: normal     BIT9
+  #                                Internal communication abnormality                  AlarmCPUAuxCommuErr     1: Fault; 0: Normal     BIT10
+  #                                Cell undervoltage protection                        AlarmCellUVP            1: fault; 0: normal     BIT11
+  #                                Battery undervoltage protection                     AlarmBatUVP             1: fault; 0: normal     BIT12
+  #                                Discharge overcurrent protection                    AlarmDchOCP             1: fault; 0: normal     BIT13
+  #                                Discharge short circuit protection                  AlarmDchSCP             1: fault; 0: normal     BIT14
+  #                                Discharge over-temperature protection               AlarmDchOTP             1: fault; 0: normal     BIT15
+  #                                Charging tube abnormality                           AlarmChargeMOS          1: fault; 0: normal     BIT16
+  #                                Discharge tube abnormality                          AlarmDischargeMOS       1: fault; 0: normal     BIT17
+  #                                GPS disconnected                                    GPSDisconneted          1: fault; 0: normal     BIT18
+  #                                Please modify the authorization password in time    Modify PWD. in time     1: Fault; 0: Normal     BIT19
+  #                                Discharge start failure                             Discharge On Failed     1: Failure; 0: Normal   BIT20
+  #                                Battery over-temperature alarm                      Battery Over Temp Alarm 1: Fault; 0: Normal     BIT21
+  #                                Temperature sensor abnormality                      Temperature sensor anomaly
+  #                                Parallel module failure                             PLCModule anomaly
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Balance line resistance is too large"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} MOS over temperature protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0002
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} The number of cells does not match the set value"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0004
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Current sensor abnormality"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0008
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Single cell overvoltage protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0010
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery overvoltage protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0020
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging overcurrent protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0040
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging short circuit protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0080
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging over-temperature protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0100
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging low temperature protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0200
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Internal communication abnormality"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0400
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Cell undervoltage protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x0800
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery undervoltage protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x1000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge overcurrent protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x2000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge short circuit protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x4000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge over-temperature protection"
+  address: 0x1200
+  offset: 0x00A2
+  register_type: holding
+  bitmask: 0x8000
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Charging tube abnormality"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0001
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Discharge tube abnormality"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0002
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} GPS disconnected"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0004
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Please modify the authorization password in time"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0008
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Please modify the authorization password in time"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0010
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Battery over-temperature alarm"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0020
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Temperature sensor abnormality"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0040
+
+- platform: modbus_controller
+  modbus_controller_id: ${modbus_contr_id}
+  name: "${name} Temperature sensor abnormality"
+  address: 0x1200
+  offset: 0x00A0
+  register_type: holding
+  bitmask: 0x0080
+
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 25"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x0100
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 26"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x0200
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 27"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x0400
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 28"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x0800
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 29"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x1000
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 30"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x2000
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 31"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x4000
+# 
+# - platform: modbus_controller
+#   modbus_controller_id: ${modbus_contr_id}
+#   name: "${name} 32"
+#   address: 0x1200
+#   offset: 0x00A0
+#   register_type: holding
+#   bitmask: 0x8000
