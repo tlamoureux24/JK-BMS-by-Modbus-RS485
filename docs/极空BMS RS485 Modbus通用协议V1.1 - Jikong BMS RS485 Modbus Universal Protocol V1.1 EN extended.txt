@@ -232,6 +232,24 @@ Field HEX DEC Type Length 				Unit
         0x0018  24  ASCII   8   R   Software version number                             SoftwareVersion
         0x0020  32  UINT32  4   R   Accumulated running time                            ODDRunTime S
         0x0024  36  UINT32  4   R   Power-on times                                      PWROnTimes times
+        0x0028  32  ASCII   16  R   Bluetooth name                                      BleName                   unofficial
+        0x0038  56  ASCII   16  R   Bluetooth PIN                                       BlePIN                    unofficial
+        0x0048  72  ASCII   8   R   First On Date                                       FirstOnDate               unofficial
+        0x0050  80  ASCII   16  R   Serial No                                           SerialNo                  unofficial
+        0x0060  96  ASCII   16  R   User Private Data                                   UserPrivateData           unofficial
+        0x0070  112 ASCII   16  R   Password                                            Password                  unofficial
+        0x0080  128 ASCII   16  R   User Data 2                                         UserData2                 unofficial
+        0x0090                                                                                                    FE FF FF FF
+        0x0094                                                                                                    8F E9 1D 02
+        0x0098                                                                                                    00 00 00 00
+        0x009C                                                                                                    90 1F 00 00
+        0x00A0                                                                                                    00 00
+        0x00A2                                                                                                    C0 D8
+        0x00A4                                                                                                    E7 FE
+        0x00A6                                                                                                    3F 00
+        0x00A8                                                                                                    00 01
+        0x00AA                                                                                                    00 00 00 00 00 00 00 00
+        
         0x00B2  178 UINT8   2   RW  Serial port 1 protocol                              UART1MPRTOLNbr
                     UINT8       RW  CAN protocol                                        CANMPRTOLNbr
         0x00B4  180 UINT8   16  R   Serial port 1 protocol control                      UART1MPRTOLEnable
@@ -265,7 +283,7 @@ Field HEX DEC Type Length 				Unit
                                                                                                  Response start                  used by
 
         0x001C  28  UNIT16  2   W   Register 1400 0x90 registers bulk download                   55 AA EB 90 03 05          About, Control, Realtime
-        0x001E  28  UNIT16  2   W   Register 1000 0x90 registers bulk download with H/L exchange 55 AA EB 90 01 05          About, Control, Realtime
+        0x001E  28  UNIT16  2   W   Register 1000 0x90 registers bulk download with H/L swap     55 AA EB 90 01 05          About, Control, Realtime
         0x0020  28  UNIT16  2   W   Register 1200 0x90 registers bulk download                   55 AA EB 90 02 05          Control, Realtime
         0x0022  28  UNIT16  2   W   Register ? 0x90 registers bulk download                      55 AA EB 90 06 05                    Detail Log
         0x0024  28  UNIT16  2   W   Register ? 0x90 registers bulk download                      55 AA EB 90 05 05                    Logging
