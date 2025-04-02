@@ -720,7 +720,7 @@ Additionally this behavior not looks stable between ESPHome releases.
 
 ![](images/128px-ASF_Logo.svg.png)  [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
-[![](images/128px-ASF_Logo.svg.png "Apache License, Version 2.0")](https://www.apache.org/licenses/LICENSE-2.0)
+[![](images/128px-ASF_Logo.svg.png) "Apache License, Version 2.0"](https://www.apache.org/licenses/LICENSE-2.0)
 
 
 ## **References**
