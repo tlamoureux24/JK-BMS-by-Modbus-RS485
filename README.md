@@ -12,27 +12,27 @@ Here is verified and validated ports configuration:
 
 ( **Warning:** There are mistakes in some documents )
 
-![](images/JK_communication_connectors.jpg)
-
-![](images/JK_communication_board.png)
+|![](images/JK_communication_connectors.jpg)|
+|-|
+|![](images/JK_communication_board.png)|
 
 | Port 1 (UART1) RJ485 cable: | CAN Port cable: |
-| | |
+|-|-|
 | ![](images/jk_RJ45_cable_en.png) | ![](images/JK_CAN_cable_cn.png) |
 
-Port 2 (UART2) wiring:
-
-![](images/JK_UART2_connector.png)
+| Port 2 (UART2) wiring: |
+|-|
+|![](images/JK_UART2_connector.png)|
 
 ##### **JK-BMS board**
 
-JK-BMS board connectors:
+|JK-BMS board connectors:|
+|-|
+|![](images/JK_main_board.png)|
 
-![](images/JK_main_board.png)
-
-JK-BMS wiring:
-
-![](images/JK_wiring.png)
+|JK-BMS wiring:|
+|-|
+|![](images/JK_wiring.png)|
 
 #### **UART2 configuration**
 
