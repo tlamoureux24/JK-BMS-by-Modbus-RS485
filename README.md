@@ -718,7 +718,7 @@ Additionally this behavior not looks stable between ESPHome releases.
 
 ## **Licence**
 
-![](imgages/128px-ASF_Logo.svg.png)
+![](images/128px-ASF_Logo.svg.png)
 
  [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
