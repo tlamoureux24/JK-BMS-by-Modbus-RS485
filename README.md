@@ -8,7 +8,7 @@
 
 ##### **Communication board**
 
-Here is verified and validated ports configuration.
+Here is verified and validated ports configuration:
 
 ( **Warning:** There are mistakes in some documents )
 
@@ -142,7 +142,7 @@ Our integration supports all documented ports
 
 <details>
 
-<summary> Jikong BMS RS485 Modbus Universal Protocol V1.1 </summary>
+<summary> Jikong BMS RS485 Modbus Universal Protocol V1.1 - Click to expand</summary>
 
 ```
 Register Map
@@ -479,13 +479,13 @@ Module name and BMS address must be unique.
 
 ## **ESP configuration**
 
-Example configuration in `lilygo-jk0.jaml`
+Example configuration in `lilygo-jk0.yaml`
 
 <details>
 
-<summary>lilygo-jk0.jaml</summary>
+<summary>lilygo-jk0.yaml - click here to expand</summary>
 
-```
+```yaml
 substitutions:
   name: jk-bms0
   modbus_contr_id: bms0
