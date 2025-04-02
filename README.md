@@ -589,6 +589,7 @@ modbus_controller:
 ```
 </details>
 Entities can be easy included / excluded using construction:
+
 ```
 sensor: !include_dir_merge_list ./JK-BMS/include/full/sensors/
 binary_sensor: !include_dir_merge_list ./JK-BMS/include/full/binary_sensors/
@@ -603,8 +604,8 @@ select: !include_dir_merge_list ./JK-BMS/include/full/select/
 # number: !include_dir_merge_list ./JK-BMS/include/test/numbers/
 # switch: !include_dir_merge_list ./JK-BMS/include/test/switches/
 # select: !include_dir_merge_list ./JK-BMS/include/test/select/
-
 ```
+
 source `.yaml` files are located in the subdirectories of `./JK-BMS/include/modules/`
 in subdirectories `include/full` or `include/test` are located symlinks to the source files.
 
