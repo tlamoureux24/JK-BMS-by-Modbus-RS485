@@ -140,9 +140,7 @@ More information in: [JK-BMS Modbus RS485 HASS ESPhome integration](https://gitl
 
 Our integration supports all documented ports
 
-<details>
-
-<summary> Jikong BMS RS485 Modbus Universal Protocol V1.1 - Click to expand</summary>
+<details><summary> Jikong BMS RS485 Modbus Universal Protocol V1.1 - Click to expand</summary>
 
 ```
 Register Map
@@ -481,9 +479,7 @@ Module name and BMS address must be unique.
 
 Example configuration in `lilygo-jk0.yaml`
 
-<details>
-
-<summary>lilygo-jk0.yaml - click here to expand</summary>
+<details><summary>lilygo-jk0.yaml - click here to expand</summary>
 
 ```yaml
 substitutions:
@@ -590,7 +586,7 @@ modbus_controller:
 </details>
 Entities can be easy included / excluded using construction:
 
-```
+```yaml
 sensor: !include_dir_merge_list ./JK-BMS/include/full/sensors/
 binary_sensor: !include_dir_merge_list ./JK-BMS/include/full/binary_sensors/
 text_sensor: !include_dir_merge_list ./JK-BMS/include/full/text_sensors/
@@ -718,7 +714,9 @@ Additionally this behavior not looks stable between ESPHome releases.
 
 ## **Licence**
 
-[![](images/128px-ASF_Logo.svg.png)*Apache License, Version 2.0*](https://www.apache.org/licenses/LICENSE-2.0)
+|[![](images/ASF_Logo.svg)](https://www.apache.org/licenses/LICENSE-2.0)|
+|-|
+| Apache License, Version 2.0 |
 
 ## **References**
 
