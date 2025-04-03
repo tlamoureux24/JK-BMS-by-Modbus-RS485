@@ -469,7 +469,7 @@ This method is used by master - slave communication and JK-BMS-MONITOR
 
 ## **Multiple BMS and parallel PowerBanks**
 
-This component is designed to operate with any number of JK-BMS.
+This component is designed to operate with any ammount of JK-BMS. (JK-BMS supports up to 16 devices connected to UART2 bus)
 Unlike UART2, BMS connected via UART1 port is always in slave mode and ESP device is master, even if address is set to 0x00. 
 Theoretically you can connect all BMSs to a common bus, but due to over 320 Entities per device and large transmission volume,
 we strongly recommend using one ESP module per BMS.
