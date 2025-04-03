@@ -469,7 +469,7 @@ This method is used by master - slave communication and JK-BMS-MONITOR
 
 ## **Multiple BMS and parallel PowerBanks**
 
-This component is designed to operate with any ammount of JK-BMS. (JK-BMS supports up to 16 devices connected to UART2 bus)
+This component is designed to operate with any amount of JK-BMS. (JK-BMS supports up to 16 devices connected to UART2 bus)
 Unlike UART2, BMS connected via UART1 port is always in slave mode and ESP device is master, even if address is set to 0x00. 
 Theoretically you can connect all BMSs to a common bus, but due to over 320 Entities per device and large transmission volume,
 we strongly recommend using one ESP module per BMS.
@@ -604,19 +604,20 @@ select: !include_dir_merge_list ./JK-BMS/include/full/select/
 ```
 
 source `.yaml` files are located in the subdirectories of `./JK-BMS/include/modules/`
-in subdirectories `include/full` or `include/test` are located symlinks to the source files.
+
+Subdirectories `include/full` or `include/test` contain symlinks to the source files.
 
 You can easy create / delete symlinks to include / exclude some registers 
 or switch between different configurations.
 
 **Warning**
-The order of including subdirectories is important.
+The order of includes is important.
 
 `sensor:` must be before `text_sensor:`.
 
 `number:` and `switch:` must be included last.
 
-This is because some Entities Id's are used in the subsequent files.
+That is because some Entities Id's are used in the subsequent files.
 
 ## **8 bit registers (half-length registers) and multiple binary switches in single register**
 
@@ -625,13 +626,13 @@ on consecutive bits of single register.
 
 Solution:
 
-Single values are read to the sensors.
+Single values are read to the `sensors`.
 
-Then existing values are combined into new, correct values (numbers) and written to the 16 or 32 bit registers.
+Then existing values are combined into new, correct values (`numbers`) and written to the 16 or 32 bit registers.
 
 JK-BMS support only commands 0x03 (read) and 0x10 (write multiple registers).
 
-Here is example:
+Here is an example:
 ```
 sensor:
   #         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
@@ -700,12 +701,12 @@ This behavior may change in future releases of esphome.
 
 There is a problem with optimization. 
 
-If set of the registers is read using `address:` and `offset:` then write command is not working properly.
+If range of the registers is read using `address:` and `offset:` then write command is not working properly.
 
-If some registers in the range are read as `sensor:` and `skip_updates:` is used inside `number:` in the same range it's affecting all registers 
+If some registers in the range are read as `sensor:` and `skip_updates:` is used inside `number:` in the same range, it's affecting all registers 
 in the range, even if `address:` and `offset:` ae used for the `sensor:` but `number:` is defined as a single register.
 
-Additionally this behavior not looks stable between ESPHome releases.
+Additionally this behavior does not look stable between ESPHome releases.
 
 ## **TO DO**
 
