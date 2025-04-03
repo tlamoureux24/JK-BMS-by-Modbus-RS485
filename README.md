@@ -635,7 +635,7 @@ Then existing values are combined into new, correct values (`numbers`) and writt
 JK-BMS support only commands 0x03 (read) and 0x10 (write multiple registers).
 
 Here is an example:
-```
+```yaml
 sensor:
   #         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
   #                     UINT8           Dry node 1 trigger source                           DRY1Trigger
