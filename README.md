@@ -713,6 +713,7 @@ Additionally this behavior does not look stable between ESPHome releases.
 - Implementing a method based on using the write to register `0x161C`.
 - ESPhome Modbus optimizing communication.
 - Improve method of 8 bit registers and binary switches usage
+- adopted [Home Assistant Lovelace UI cards](https://github.com/syssi/esphome-jk-bms/discussions/230)
 
 ## **Licence**
 
@@ -726,3 +727,4 @@ Additionally this behavior does not look stable between ESPHome releases.
 * <https://github.com/syssi/esphome-jk-bms/>
 * LILYGO example configuration <https://github.com/Xinyuan-LilyGO/T-CAN485/blob/main/esphome/rs485.yaml>
 * Working example: <https://ha.picoides.io/>
+* [Home Assistant Lovelace UI cards](https://github.com/syssi/esphome-jk-bms/discussions/230)
