@@ -91,9 +91,9 @@ The following CAN protocols are supported on the CAN port:
 
 ### **Communication protocol**
 
-#### **UART1 usage**
+#### **UART2 usage**
 
-If Device Address is set to 0x00 (by the switches) then UART2 protocol is set to **001** and the master mode of the JK BMS RS485 Modbus V1.0 protocol is set.
+If Device Address is set to 0x00 (by the switches) then UART2 protocol is set to **015** and the master mode of the JK BMS RS485 Modbus V1.0 protocol is set.
 
 During every 15 sec. status of the master device is send to the bus, followed by data request addressed to the all 15 slaves:
 
@@ -124,17 +124,17 @@ master    >>> 0E 10 16 20 00 01 02 00 00 97 01
 master    >>> 0F 10 16 20 00 01 02 00 00 9A 91
 ```
 
-more data you can find in the [`/docs/log`](./docs/log) catalog of the JK-BMS project.
+more data can be foun in the [`/docs/log`](./docs/log) catalog of the JK-BMS project.
 
-If Device Address is set to 1 - 15 (0x01 - 0x0F) BMS is in the Modbus slave mode and protocol is set to **001**
+If Device Address is set to 1 - 15 (0x01 - 0x0F) then BMS is in the Modbus slave mode and protocol is set to **001**
 
-#### **UART2 Usage**
+#### **UART1 Usage**
 
-Port RJ485-1 always (?) is in slave mode, even if Device Address is 0x00.
+Port RJ485-1 is always ( *required verification* ) in the slave mode, even if Device Address is 0x00.
 
-Our Hass integration using `JK BMS RS485 Modbus V1.0` (001) protocol.
+Our Hass integration is using `JK BMS RS485 Modbus V1.0` (001) protocol.
 
-More information in: [JK-BMS Modbus RS485 HASS ESPhome integration](https://gitlab.stn.pl/picoides-monitor/bms/jk-bms)
+{{<comment>}} More information: [JK-BMS Modbus RS485 HASS ESPhome integration](https://gitlab.stn.pl/picoides-monitor/bms/jk-bms) {{</comment>}}
 
 ### **Supported registers**
 
@@ -459,12 +459,13 @@ This method is used by master - slave communication and JK-BMS-MONITOR
 
 ## **Requirements**
 
-- [ESPhome](https://github.com/esphome/esphome/releases)
 - ESP32 device with 320KB RAM, 4MB Flash and RS485 Adapter
 - Recommended devices, with RS485 on board:
-      - [T-CAN485](https://lilygo.cc/products/t-can485)
-      - [KAmodESP32 POW RS485](https://wiki.kamamilabs.com/index.php?title=KAmodESP32_POW_RS485)
-- esphome installed - on your computer or HASS instance (ESPHome Builder)
+  - [T-CAN485](https://lilygo.cc/products/t-can485)
+  - [KAmodESP32 POW RS485](https://wiki.kamamilabs.com/index.php?title=KAmodESP32_POW_RS485)
+- [ESPhome](https://github.com/esphome/esphome/releases)
+- [HomeAssistant](https://www.home-assistant.io/)
+- esphome should installed on your computer or HASS instance (ESPHome Builder)
 
 ## **Multiple BMS and parallel PowerBanks**
 
