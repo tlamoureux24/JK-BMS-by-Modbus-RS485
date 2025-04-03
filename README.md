@@ -8,9 +8,9 @@
 
 ##### **Communication board**
 
-Here is verified and validated ports configuration:
+Configuration of the Communication Board presented below is verified and validated.
 
-( **Warning:** There are mistakes in some documents )
+( **Warning:** Some documents and manuals contain incorrect description of ports)
 
 |![](images/JK_communication_connectors.jpg)|
 |-|
