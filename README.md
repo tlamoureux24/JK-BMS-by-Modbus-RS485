@@ -93,9 +93,9 @@ The following CAN protocols are supported on the CAN port:
 
 #### **UART1 usage**
 
-If Device Address 0x00 is set (by the switches), UART2 protocol is set to **001** - the master mode of the JK BMS RS485 Modbus V1.0 protocol is set.
+If Device Address is set to 0x00 (by the switches) then UART2 protocol is set to **001** and the master mode of the JK BMS RS485 Modbus V1.0 protocol is set.
 
-Each 15 sec. own (master) status is send to the bus, followed by data request addressed to the all 15 slaves:
+Each 15 sec. status of the master device is send to the bus, followed by data request addressed to the all 15 slaves:
 
 ```
 master    >>> 55 AA EB 90 02 00 C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C8 0C C7 0C C8 0C C7 0C C8 0C C8 0C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF 00 00 C7 0C 01 00 00 01 3E 00 3B 00 3D 00 3B 00 3E 00 3B 00 3D 00 3B 00 3E 00 3C 00 3E 00 3C 00 3E 00 3D 00 3F 00 3D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 BD 00 00 00 00 00 70 CC 00 00 00 00 00 00 00 00 00 00 A9 00 AD 00 00 00 08 00 00 00 00 41 6B 18 03 00 90 CA 04 00 00 00 00 00 FB 01 00 00 64 00 00 00 D8 FF 03 00 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 00 01 00 00 00 AF 03 00 00 00 00 5E 48 3F 40 00 00 00 00 71 14 00 00 00 01 01 01 00 06 00 00 72 70 26 00 00 00 00 00 BD 00 AE 00 A8 00 AB 03 7F B8 1F 09 05 00 00 00 80 51 01 00 00 00 02 03 A5 67 00 00 00 00 00 00 00 FE FF 7F DC 2F 01 01 B0 0F 00 00 00 C5
