@@ -1,6 +1,6 @@
 # **Multiple JK-BMS Modbus RJ485 integration**
 
-## **Theory of operation**
+## **Principle of operation**
 
 ### **Communication Module Ports**
 
@@ -10,7 +10,7 @@
 
 Configuration of the Communication Board presented below is verified and validated.
 
-( **Warning:** Some documents and manuals contain incorrect description of ports)
+( **Warning:** Some available documents and manuals contain incorrect description of ports)
 
 |![](images/JK_communication_connectors.jpg)|
 |-|
@@ -93,7 +93,7 @@ The following CAN protocols are supported on the CAN port:
 
 #### **UART1 usage**
 
-If Device Address 0x00 is set (by the switches) UART2 is set to **001** - the master mode of the JK BMS RS485 Modbus V1.0 protocol
+If Device Address 0x00 is set (by the switches), UART2 protocol is set to **001** - the master mode of the JK BMS RS485 Modbus V1.0 protocol is set.
 
 Each 15 sec. own (master) status is send to the bus, followed by data request addressed to the all 15 slaves:
 
