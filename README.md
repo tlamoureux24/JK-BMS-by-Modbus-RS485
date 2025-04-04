@@ -1,6 +1,6 @@
 # **Multiple JK-BMS Modbus RJ485 integration**
 
-## **Theory of operation**
+## **Principle of operation**
 
 ### **Communication Module Ports**
 
@@ -8,31 +8,31 @@
 
 ##### **Communication board**
 
-Here is verified and validated ports configuration.
+Configuration of the Communication Board presented below is verified and validated.
 
-( **Warning:** There are mistakes in some documents )
+( **Warning:** Some available documents and manuals contain incorrect description of ports)
 
-![](images/JK_communication_connectors.jpg)
-
-![](images/JK_communication_board.png)
+|![](images/JK_communication_connectors.jpg)|
+|-|
+|![](images/JK_communication_board.png)|
 
 | Port 1 (UART1) RJ485 cable: | CAN Port cable: |
-| | |
+|-|-|
 | ![](images/jk_RJ45_cable_en.png) | ![](images/JK_CAN_cable_cn.png) |
 
-Port 2 (UART2) wiring:
-
-![](images/JK_UART2_connector.png)
+| Port 2 (UART2) wiring: |
+|-|
+|![](images/JK_UART2_connector.png)|
 
 ##### **JK-BMS board**
 
-JK-BMS board connectors:
+|JK-BMS board connectors:|
+|-|
+|![](images/JK_main_board.png)|
 
-![](images/JK_main_board.png)
-
-JK-BMS wiring:
-
-![](images/JK_wiring.png)
+|JK-BMS wiring:|
+|-|
+|![](images/JK_wiring.png)|
 
 #### **UART2 configuration**
 
@@ -91,11 +91,11 @@ The following CAN protocols are supported on the CAN port:
 
 ### **Communication protocol**
 
-#### **UART1 usage**
+#### **UART2 usage**
 
-If Device Address 0x00 is set (by the switches) UART2 is set to **001** - the master mode of the JK BMS RS485 Modbus V1.0 protocol
+If Device Address is set to 0x00 (by the switches) then UART2 protocol is set to **015** and the master mode of the JK BMS RS485 Modbus V1.0 protocol is set.
 
-Each 15 sec. own (master) status is send to the bus, followed by data request addressed to the all 15 slaves:
+During every 15 sec. status of the master device is send to the bus, followed by data request addressed to the all 15 slaves:
 
 ```
 master    >>> 55 AA EB 90 02 00 C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C7 0C C8 0C C7 0C C8 0C C7 0C C8 0C C8 0C 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF FF 00 00 C7 0C 01 00 00 01 3E 00 3B 00 3D 00 3B 00 3E 00 3B 00 3D 00 3B 00 3E 00 3C 00 3E 00 3C 00 3E 00 3D 00 3F 00 3D 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 BD 00 00 00 00 00 70 CC 00 00 00 00 00 00 00 00 00 00 A9 00 AD 00 00 00 08 00 00 00 00 41 6B 18 03 00 90 CA 04 00 00 00 00 00 FB 01 00 00 64 00 00 00 D8 FF 03 00 01 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 FF 00 01 00 00 00 AF 03 00 00 00 00 5E 48 3F 40 00 00 00 00 71 14 00 00 00 01 01 01 00 06 00 00 72 70 26 00 00 00 00 00 BD 00 AE 00 A8 00 AB 03 7F B8 1F 09 05 00 00 00 80 51 01 00 00 00 02 03 A5 67 00 00 00 00 00 00 00 FE FF 7F DC 2F 01 01 B0 0F 00 00 00 C5
@@ -124,25 +124,25 @@ master    >>> 0E 10 16 20 00 01 02 00 00 97 01
 master    >>> 0F 10 16 20 00 01 02 00 00 9A 91
 ```
 
-more data you can find in the '/docs/log' catalog of the JK-BMS project.
+more data can be foun in the [`/docs/log`](./docs/log) catalog of the JK-BMS project.
 
-If Device Address is set to 1 - 15 (0x01 - 0x0F) BMS is in the Modbus slave mode and protocol is set to **001**
+If Device Address is set to 1 - 15 (0x01 - 0x0F) then BMS is in the Modbus slave mode and protocol is set to **001**
 
-#### **UART2 Usage**
+#### **UART1 Usage**
 
-Port RJ485-1 always (?) is in slave mode, even if Device Address is 0x00.
+Port RJ485-1 is always ( *required verification* ) in the slave mode, even if Device Address is 0x00.
 
-Our Hass integration using `JK BMS RS485 Modbus V1.0` (001) protocol.
+Our Hass integration is using `JK BMS RS485 Modbus V1.0` (001) protocol.
 
-More information in: [JK-BMS Modbus RS485 HASS ESPhome integration](https://gitlab.stn.pl/picoides-monitor/bms/jk-bms)
+<!---
+More information: [JK-BMS Modbus RS485 HASS ESPhome integration](https://gitlab.stn.pl/picoides-monitor/bms/jk-bms)
+--->
 
 ### **Supported registers**
 
 Our integration supports all documented ports
 
-<details>
-
-<summary> Jikong BMS RS485 Modbus Universal Protocol V1.1 </summary>
+<details><summary> Jikong BMS RS485 Modbus Universal Protocol V1.1 - Click to expand</summary>
 
 ```
 Register Map
@@ -461,16 +461,17 @@ This method is used by master - slave communication and JK-BMS-MONITOR
 
 ## **Requirements**
 
-- [ESPhome](https://github.com/esphome/esphome/releases)
 - ESP32 device with 320KB RAM, 4MB Flash and RS485 Adapter
 - Recommended devices, with RS485 on board:
-      - [T-CAN485](https://lilygo.cc/products/t-can485)
-      - [KAmodESP32 POW RS485](https://wiki.kamamilabs.com/index.php?title=KAmodESP32_POW_RS485)
-- esphome installed - on your computer or HASS instance (ESPHome Builder)
+  - [T-CAN485](https://lilygo.cc/products/t-can485)
+  - [KAmodESP32 POW RS485](https://wiki.kamamilabs.com/index.php?title=KAmodESP32_POW_RS485)
+- [ESPhome](https://github.com/esphome/esphome/releases)
+- [HomeAssistant](https://www.home-assistant.io/)
+- esphome should installed on your computer or HASS instance (ESPHome Builder)
 
 ## **Multiple BMS and parallel PowerBanks**
 
-This component is designed to operate with any number of JK-BMS.
+This component is designed to operate with any amount of JK-BMS. (JK-BMS supports up to 16 devices connected to UART2 bus)
 Unlike UART2, BMS connected via UART1 port is always in slave mode and ESP device is master, even if address is set to 0x00. 
 Theoretically you can connect all BMSs to a common bus, but due to over 320 Entities per device and large transmission volume,
 we strongly recommend using one ESP module per BMS.
@@ -479,13 +480,11 @@ Module name and BMS address must be unique.
 
 ## **ESP configuration**
 
-Example configuration in `lilygo-jk0.jaml`
+Example configuration in `lilygo-jk0.yaml`
 
-<details>
+<details><summary>lilygo-jk0.yaml - click here to expand</summary>
 
-<summary>lilygo-jk0.jaml</summary>
-
-```
+```yaml
 substitutions:
   name: jk-bms0
   modbus_contr_id: bms0
@@ -589,7 +588,8 @@ modbus_controller:
 ```
 </details>
 Entities can be easy included / excluded using construction:
-```
+
+```yaml
 sensor: !include_dir_merge_list ./JK-BMS/include/full/sensors/
 binary_sensor: !include_dir_merge_list ./JK-BMS/include/full/binary_sensors/
 text_sensor: !include_dir_merge_list ./JK-BMS/include/full/text_sensors/
@@ -603,22 +603,23 @@ select: !include_dir_merge_list ./JK-BMS/include/full/select/
 # number: !include_dir_merge_list ./JK-BMS/include/test/numbers/
 # switch: !include_dir_merge_list ./JK-BMS/include/test/switches/
 # select: !include_dir_merge_list ./JK-BMS/include/test/select/
-
 ```
+
 source `.yaml` files are located in the subdirectories of `./JK-BMS/include/modules/`
-in subdirectories `include/full` or `include/test` are located symlinks to the source files.
+
+Subdirectories `include/full` or `include/test` contain symlinks to the source files.
 
 You can easy create / delete symlinks to include / exclude some registers 
 or switch between different configurations.
 
 **Warning**
-The order of including subdirectories is important.
+The order of includes is important.
 
 `sensor:` must be before `text_sensor:`.
 
 `number:` and `switch:` must be included last.
 
-This is because some Entities Id's are used in the subsequent files.
+That is because some Entities Id's are used in the subsequent files.
 
 ## **8 bit registers (half-length registers) and multiple binary switches in single register**
 
@@ -627,14 +628,14 @@ on consecutive bits of single register.
 
 Solution:
 
-Single values are read to the sensors.
+Single values are read to the `sensors`.
 
-Then existing values are combined into new, correct values (numbers) and written to the 16 or 32 bit registers.
+Then existing values are combined into new, correct values (`numbers`) and written to the 16 or 32 bit registers.
 
 JK-BMS support only commands 0x03 (read) and 0x10 (write multiple registers).
 
-Here is example:
-```
+Here is an example:
+```yaml
 sensor:
   #         0x00E4  228 UINT8   2   RW  LCD buzzer trigger source                           LCDBuzzerTrigger
   #                     UINT8           Dry node 1 trigger source                           DRY1Trigger
@@ -702,23 +703,25 @@ This behavior may change in future releases of esphome.
 
 There is a problem with optimization. 
 
-If set of the registers is read using `address:` and `offset:` then write command is not working properly.
+If range of the registers is read using `address:` and `offset:` then write command is not working properly.
 
-If some registers in the range are read as `sensor:` and `skip_updates:` is used inside `number:` in the same range it's affecting all registers 
+If some registers in the range are read as `sensor:` and `skip_updates:` is used inside `number:` in the same range, it's affecting all registers 
 in the range, even if `address:` and `offset:` ae used for the `sensor:` but `number:` is defined as a single register.
 
-Additionally this behavior not looks stable between ESPHome releases.
+Additionally this behavior does not look stable between ESPHome releases.
 
 ## **TO DO**
 
 - Implementing a method based on using the write to register `0x161C`.
 - ESPhome Modbus optimizing communication.
 - Improve method of 8 bit registers and binary switches usage
+- adapting [Home Assistant Lovelace UI cards](https://github.com/syssi/esphome-jk-bms/discussions/230)
 
 ## **Licence**
 
-|![](imgages/ASF_Logo.svg)|[Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)|
-|||
+|[![](images/ASF_Logo.svg)](https://www.apache.org/licenses/LICENSE-2.0)|
+|-|
+| Apache License, Version 2.0 |
 
 ## **References**
 
@@ -726,3 +729,4 @@ Additionally this behavior not looks stable between ESPHome releases.
 * <https://github.com/syssi/esphome-jk-bms/>
 * LILYGO example configuration <https://github.com/Xinyuan-LilyGO/T-CAN485/blob/main/esphome/rs485.yaml>
 * Working example: <https://ha.picoides.io/>
+* [Home Assistant Lovelace UI cards](https://github.com/syssi/esphome-jk-bms/discussions/230)
