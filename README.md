@@ -134,7 +134,9 @@ Port RJ485-1 is always ( *required verification* ) in the slave mode, even if De
 
 Our Hass integration is using `JK BMS RS485 Modbus V1.0` (001) protocol.
 
+<!---
 More information: [JK-BMS Modbus RS485 HASS ESPhome integration](https://gitlab.stn.pl/picoides-monitor/bms/jk-bms)
+--->
 
 ### **Supported registers**
 
